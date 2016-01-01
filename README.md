@@ -1,3 +1,3 @@
 # dice_fieldwork
-paperless client relationship management for service-based businesses
+paperless client relationship management for service-based businesses that work
 
