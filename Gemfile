@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -51,33 +51,29 @@ group :development, :test do
   gem 'dotenv-rails', '~> 2.0.2'
 end
 
-group :development do
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-
-  ## app specific gems
-  # backend
-  gem 'rails_12factor', '~> 0.0.3'
-  gem 'rails_admin', '~> 0.7.0'
-  # gem 'paper_trail', '~> 4.0.0'
-  gem 'devise', '~> 3.5', '>= 3.5.2'
-  gem 'shopify_app', '~> 6.3'
-  gem 'omniauth'
-  gem 'omniauth-twitter'
-  gem 'omniauth-facebook'
-  gem 'omniauth-linkedin'
-
-
-  gem 'carrierwave', '~> 0.10.0'
-  gem 'rmagick', '~> 2.15', '>= 2.15.4'
-  # frontend
-  source 'https://rails-assets.org' do
-    gem 'rails-assets-bootstrap'
-  end
-  gem 'high_voltage', '~> 2.4'
-
+group :production do
+  gem 'thin', '~> 1.6', '>= 1.6.4'
 end
+
+## app specific gems
+# backend
+gem 'rails_12factor', '~> 0.0.3'
+gem 'rails_admin', '~> 0.7.0'
+# gem 'paper_trail', '~> 4.0.0'
+gem 'devise', '~> 3.5', '>= 3.5.2'
+gem 'shopify_app', '~> 6.3'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-linkedin'
+
+
+gem 'carrierwave', '~> 0.10.0'
+gem 'rmagick', '~> 2.15', '>= 2.15.4'
+# frontend
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap'
+end
+gem 'high_voltage', '~> 2.4'
+
 
