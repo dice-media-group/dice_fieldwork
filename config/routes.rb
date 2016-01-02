@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'notes/index'
+
+  get 'notes/new'
+
+  resources :accounts do
+    resources :notes, only: [:index, :new]
+  end
   devise_for :users
   mount RailsAdmin::Engine => '/backstage', as: 'rails_admin'
   # The priority is based upon order of creation: first created -> highest priority.
