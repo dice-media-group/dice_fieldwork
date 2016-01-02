@@ -1,3 +1,3 @@
 class Account < ActiveRecord::Base
-  has_many :addesses
+  has_many :addresses
 end
