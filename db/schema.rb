@@ -11,10 +11,75 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160101182415) do
+ActiveRecord::Schema.define(version: 20160118194121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "email"
+    t.boolean  "no_customer_email_address"
+    t.string   "primary_phone_number"
+    t.string   "secondary_phone_number"
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "street_one"
+    t.string   "street_two"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.boolean  "is_billing"
+  end
+
+  add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "locations", ["account_id"], name: "index_locations_on_account_id", using: :btree
+
+  create_table "notes", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "notable_id"
+    t.string   "notable_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "notes", ["notable_type", "notable_id"], name: "index_notes_on_notable_type_and_notable_id", using: :btree
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
+  create_table "services", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.decimal  "price",       precision: 10, scale: 2
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "services", ["name"], name: "index_services_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -1,6 +1,5 @@
 GEM
   remote: https://rubygems.org/
-  remote: https://rails-assets.org/
   specs:
     actionmailer (4.2.5)
       actionpack (= 4.2.5)
@@ -44,12 +43,20 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    ansi (1.5.0)
     arel (6.0.3)
     awesome_print (1.6.1)
     backports (3.6.7)
     bcrypt (3.1.10)
     builder (3.2.2)
     byebug (8.2.1)
+    capybara (2.6.0)
+      addressable
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -73,6 +80,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    diff-lcs (1.2.5)
     dotenv (2.0.2)
     dotenv-rails (2.0.2)
       dotenv (= 2.0.2)
@@ -82,6 +90,11 @@ GEM
       ffi (>= 1.3.0)
     eventmachine (1.0.8)
     execjs (2.6.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.0)
@@ -112,12 +125,13 @@ GEM
       bundler (~> 1.0)
       guard (~> 2.2)
     guard-compat (1.2.1)
-    guard-minitest (2.4.4)
-      guard-compat (~> 1.2)
-      minitest (>= 3.0)
     guard-passenger (0.6.2)
       guard (>= 1.1.0)
       guard-compat (~> 1.1)
+    guard-rspec (4.6.4)
+      guard (~> 2.1)
+      guard-compat (~> 1.1)
+      rspec (>= 2.99.0, < 4.0)
     haml (4.0.7)
       tilt
     hashie (3.4.3)
@@ -152,9 +166,6 @@ GEM
     mime-types (2.99)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
-    minitest-spec-rails (5.3.0)
-      minitest (~> 5.0)
-      rails (>= 4.1)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -221,9 +232,6 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.5)
       sprockets-rails
-    rails-assets-bootstrap (3.3.6)
-      rails-assets-jquery (>= 1.9.1, < 3)
-    rails-assets-jquery (2.1.4)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -269,6 +277,27 @@ GEM
       railties (>= 4.2.0, < 5.1)
     rmagick (2.15.4)
     rr (1.1.2)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.1)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-rails (3.4.0)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     safe_yaml (1.0.4)
     sass (3.4.20)
     sass-rails (5.0.4)
@@ -316,6 +345,8 @@ GEM
       typhoeus (~> 0.6, >= 0.6.8)
     turbolinks (2.5.3)
       coffee-rails
+    turn (0.9.6)
+      ansi
     typhoeus (0.8.0)
       ethon (>= 0.8.0)
     tzinfo (1.2.2)
@@ -326,6 +357,8 @@ GEM
     warden (1.2.4)
       rack (>= 1.0)
     websocket (1.2.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -334,19 +367,20 @@ DEPENDENCIES
   activerecord-nulldb-adapter
   awesome_print
   byebug
+  capybara
   carrierwave (~> 0.10.0)
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.3.0)
   devise (~> 3.5, >= 3.5.2)
   dotenv-rails (~> 2.0.2)
+  factory_girl_rails
   guard
   guard-bundler (~> 2.0.0)
-  guard-minitest
   guard-passenger
+  guard-rspec
   high_voltage (~> 2.4)
   jbuilder (~> 2.0)
   jquery-rails
-  minitest-spec-rails
   omniauth
   omniauth-facebook
   omniauth-linkedin
@@ -354,17 +388,18 @@ DEPENDENCIES
   passenger
   pg (~> 0.15)
   rails (= 4.2.5)
-  rails-assets-bootstrap!
   rails_12factor (~> 0.0.3)
   rails_admin (~> 0.7.0)
   rmagick (~> 2.15, >= 2.15.4)
   rr (~> 1.1.2)
+  rspec-rails (~> 3.4)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   shopify_app (~> 6.3)
   thin (~> 1.6, >= 1.6.4)
   travis (~> 1.7.4)
   turbolinks
+  turn
   uglifier (>= 1.3.0)
 
 BUNDLED WITH

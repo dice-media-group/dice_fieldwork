@@ -1,0 +1,10 @@
+<h1>Notes#index</h1>
+<p>Find me in app/views/notes/index.html.erb</p>
+<h1 id="notes">Notes</h1>
+<div id="notes">
+    <div class="note">
+            <% @notes.each do |note| %>
+                <%= note.contemt %>
+            <% end %>
+    </div>
+</div>
