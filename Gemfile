@@ -37,10 +37,17 @@ group :development, :test do
   gem 'byebug'
 
   ## gems for app
-  gem 'minitest-spec-rails'
+  # gem 'minitest-spec-rails'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  # Pretty printed test output
+  gem 'turn', :require => false
+  
   gem 'passenger'
   gem 'guard'
-  gem 'guard-minitest'
+  # gem 'guard-minitest'
+  gem 'guard-rspec', require: false
   gem 'guard-passenger'
   gem "guard-bundler", "~> 2.0.0"
   gem 'rr', '~> 1.1.2'
@@ -71,9 +78,9 @@ gem 'omniauth-linkedin'
 gem 'carrierwave', '~> 0.10.0'
 gem 'rmagick', '~> 2.15', '>= 2.15.4'
 # frontend
-source 'https://rails-assets.org' do
-  gem 'rails-assets-bootstrap'
-end
+# source 'https://rails-assets.org' do
+#   gem 'rails-assets-bootstrap'
+# end
 gem 'high_voltage', '~> 2.4'
 
 
