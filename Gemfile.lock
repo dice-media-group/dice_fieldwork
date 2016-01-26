@@ -50,6 +50,7 @@ GEM
     bcrypt (3.1.10)
     builder (3.2.2)
     byebug (8.2.1)
+    cancancan (1.13.1)
     capybara (2.6.0)
       addressable
       mime-types (>= 1.16)
@@ -367,6 +368,7 @@ DEPENDENCIES
   activerecord-nulldb-adapter
   awesome_print
   byebug
+  cancancan (~> 1.13, >= 1.13.1)
   capybara
   carrierwave (~> 0.10.0)
   coffee-rails (~> 4.1.0)
