@@ -3,8 +3,16 @@
 <head>
   <title>DiceFieldwork</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+<!-- -->
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
 </head>
 <body>
     <div id="container">
@@ -22,6 +30,55 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
+<!-- -->
 
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Fieldwork</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <!-- <form class="navbar-form navbar-right">
+                <div class="form-group">
+                  <input placeholder="Email" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                  <input placeholder="Password" class="form-control" type="password">
+                </div>
+                <button type="submit" class="btn btn-success">Sign in</button>
+              </form> -->
+            </div><!--/.navbar-collapse -->
+          </div>
+        </nav>
+<%= yield %>
+          <hr>
+
+          <footer>
+            <p>© 2015 Company, Inc.</p>
+          </footer>
+        </div> <!-- /container -->
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="../../dist/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  
+
+    <button style="padding: 4px 6px;position: absolute;left: 141px;top: 840px;background-color: #F7F7F7;  background: linear-gradient(#FFF, #F0F0F0);  border: 1px solid #CCC;  color: #5F5F5F;  cursor: pointer;  font-weight: bold;  text-shadow: 0 1px #FFF;  white-space: nowrap;border-radius: 3px;font-size: 11px; display: none; z-index: 8675309" class="tw-schedule-btn" id="tw_schedule_btn"><em style="background-image: url('//www.tailwindapp.com/app/extensions/Tailwind_swoosh.png'); width: 16px;height: 16px;margin-top: -4px; display: inline-block; position: relative; vertical-align:middle;background-size: 16px;"></em><span>Schedule</span></button>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 </html>
