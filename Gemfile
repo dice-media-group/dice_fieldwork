@@ -77,9 +77,11 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 
-
+# asset upload
 gem 'carrierwave', '~> 0.10.0'
 gem 'rmagick', '~> 2.15', '>= 2.15.4'
+
+
 # frontend
 # source 'https://rails-assets.org' do
 #   gem 'rails-assets-bootstrap'
