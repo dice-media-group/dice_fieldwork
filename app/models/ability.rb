@@ -14,7 +14,8 @@ class Ability
     if user && user.is_sales_rep?
       can :access, :rails_admin # needed to access RailsAdmin
       can :dashboard              # grant access to the dashboard
-      can :manage, [Account, Address, Note, Service]
+      can :read, [Calendar, User]
+      can :manage, [Account, Address, Note, Service, Consultation]
       # can :read, :all
       
       # can :create, Account

@@ -43,6 +43,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'shoulda-matchers'
   # Pretty printed test output
   gem 'turn', :require => false
   
@@ -69,18 +70,23 @@ end
 gem 'rails_12factor', '~> 0.0.3'
 gem 'rails_admin', '~> 0.7.0'
 # gem 'paper_trail', '~> 4.0.0'
+
+# authentication
 gem 'devise', '~> 3.5', '>= 3.5.2'
-gem 'cancancan', '~> 1.13', '>= 1.13.1'
-gem 'shopify_app', '~> 6.3'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 
+# authorization
+gem 'cancancan', '~> 1.13', '>= 1.13.1'
+
 # asset upload
 gem 'carrierwave', '~> 0.10.0'
 gem 'rmagick', '~> 2.15', '>= 2.15.4'
 
+# scheduling
+gem 'ice_cube', '~> 0.13.3'
 
 # frontend
 # source 'https://rails-assets.org' do
