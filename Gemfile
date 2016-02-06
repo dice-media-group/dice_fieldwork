@@ -41,6 +41,7 @@ group :development, :test do
   ## gems for app
   # gem 'minitest-spec-rails'
   gem 'rspec-rails', '~> 3.4'
+  gem 'rspec-collection_matchers', '~> 1.1', '>= 1.1.2'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'shoulda-matchers'

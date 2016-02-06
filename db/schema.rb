@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131155213) do
+ActiveRecord::Schema.define(version: 20160131235348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,11 @@ ActiveRecord::Schema.define(version: 20160131155213) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "consultations", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -82,6 +87,20 @@ ActiveRecord::Schema.define(version: 20160131155213) do
     t.integer  "user_id"
   end
 
+  create_table "line_items", force: :cascade do |t|
+    t.integer  "service_id"
+    t.integer  "cart_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "quantity",   default: 1
+    t.decimal  "price"
+    t.integer  "order_id"
+  end
+
+  add_index "line_items", ["cart_id"], name: "index_line_items_on_cart_id", using: :btree
+  add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
+  add_index "line_items", ["service_id"], name: "index_line_items_on_service_id", using: :btree
+
   create_table "locations", force: :cascade do |t|
     t.string   "name"
     t.integer  "account_id"
@@ -100,6 +119,12 @@ ActiveRecord::Schema.define(version: 20160131155213) do
   end
 
   add_index "notes", ["notable_type", "notable_id"], name: "index_notes_on_notable_type_and_notable_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "pay_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.string   "first_name"
