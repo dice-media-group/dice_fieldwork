@@ -34,5 +34,23 @@ class Consultation < ActiveRecord::Base
       return true
     end
   end
+
+  def start_time
+    # 'light brown'
+    if not_all_day?
+      from_time.strftime "%I:%M %p (%Z)"
+    else
+      "all day"
+    end
+  end
+
+  def get_start
+    start_date = from_date.strftime "%d/%m/%Y"
+    start_clock = start_time
+    start_array = Array.new
+    start_array << start_date
+    start_array << start_clock
+    start_time = start_array.join(" ").to_s
+  end
   
 end

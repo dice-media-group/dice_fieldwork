@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="row">
+            <h1 id="full_name"><%= @account.name.to_s %></h1>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>
+                  <b>Email:</b>
+                  <%= @account.email %>
+                </p>
+    
+                <p>
+                  <b>Phone number:</b>
+                  <%= @account.primary_phone_number %>
+                </p>
+    
+                  <p>
+                    <b>Alternate phone number:</b>
+                  <%= @account.secondary_phone_number %>
+                  </p>
+    
+                <p>
+                  <b>Service address:</b>
+                  <%= @account.return_service_location(@account.id).return_postal_format %>
+                </p>
+    
+                <p>
+                  <b>Billing address:</b>
+                  <%= @account.return_billing_location(@account.id).return_postal_format %>
+                </p>
+    
+                <!-- <p>
+                  <b>Initial charge:</b>
+                  $20.00
+                </p>
+
+                <p>
+                  <b>Recurring charge:</b>
+                  $33.00 (monthly)
+                </p>
+
+                <p>
+                  <b>First recurring charge:</b>
+                  09/04/2015
+                </p>
+
+                <p>
+                  <b>Payment method:</b>
+                  Credit Card
+                </p>
+
+                <p>
+                  <b>Sold by:</b>
+                  Colton Stevens
+                </p> -->
+    
+                <!-- <p>
+                  <b>Entered by:</b>
+                  Colton Stevens
+                </p> -->
+    
+                <p>
+                  <b>Sold on:</b>
+                  <%= @account.local_genesis %>
+                  
+                </p>
+    
+    
+              </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <%= link_to "Edit account", edit_account_path(@account) %> | <%= link_to "View service agreement", account_path(@account) %> | <%= link_to "Back to accounts", accounts_path %>
+        </div>
+        <div class="row">
+            <fieldset>
+                <legend>Service Consultations</legend>
+                  <table class="index_list">
+                    <tbody><tr>
+                      <th>When</th>
+                      <th>Service Route</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
+                    <% @account.consultations.each do |consult| %>
+                      <tr class="g">
+                        <td style="padding:0 15px 0 15px;">
+                            <!-- <a href="/appointments?date=2015-08-05&amp;service_route=79"><%= consult.get_start %></a> -->
+                            <%= link_to consult.get_start, consultation_path(consult) %>
+                        </td>
+                        <td style="padding:0 15px 0 15px;">
+                            <%= link_to "Serviced by #{consult.user.email}", consultation_path(consult) %>
+                            <!-- <a href="/reports/appointment/20189" target="_blank">Serviced by Blake Pharis</a></td> -->
+                        <td style="padding:0 15px 0 15px;">
+                          <!-- Finished -->
+                        </td>
+                        <td class="record_actions">
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody></table>
+              </fieldset>
+        </div>
+    </div>
+</div>

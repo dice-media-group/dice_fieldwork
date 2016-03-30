@@ -75,5 +75,11 @@ RSpec.describe Consultation, type: :model do
       end
     end
   end
+  
+  describe '#start_time' do
+    it 'is a string' do
+      expect(consultation.start_time).to be_kind_of(String)
+    end
+  end
 
 end

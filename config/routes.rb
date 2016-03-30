@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
+  get 'accounts/index'
+
+  get 'accounts/show'
+
+  get 'accounts/edit'
+
+  get 'accounts/new'
+
   devise_for :users
-  resources :services, :orders, :line_items, :carts
+  resources :services, :orders, :line_items, :carts, :consultations
 
   resources :accounts do
     resources :notes, only: [:index, :new]
+    # resources :consultations, only: [:index, :new]
   end
   mount RailsAdmin::Engine => '/backstage', as: 'rails_admin'
   # The priority is based upon order of creation: first created -> highest priority.

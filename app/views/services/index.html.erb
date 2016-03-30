@@ -1,25 +1,25 @@
-<h1>Listing products</h1>
+<h1>Listing services</h1>
 
 <table>
-<% @products.each do |product| %>
+<% @services.each do |service| %>
   <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
 
     <td>
-      <%= image_tag(product.image_url, class: 'list_image') %>
+      <%# image_tag(service.image_url, class: 'list_image') %>
     </td>
 
     <td class="list_description">
       <dl>
-        <dt><%= product.title %></dt>
-        <dd><%= truncate(strip_tags(product.description),
+        <dt><%= service.name %></dt>
+        <dd><%= truncate(strip_tags(service.description),
                length: 80) %></dd>
       </dl>
     </td>
 
     <td class="list_actions">
-      <%= link_to 'Show', product %><br/>
-      <%= link_to 'Edit', edit_product_path(product) %><br/>
-      <%= link_to 'Destroy', product, method: :delete,
+      <%= link_to 'Show', service %><br/>
+      <%= link_to 'Edit', edit_service_path(service) %><br/>
+      <%= link_to 'Destroy', service, method: :delete,
                   data: { confirm: 'Are you sure?' } %>
     </td>
   </tr>
@@ -28,4 +28,4 @@
 
 <br />
 
-<%= link_to 'New product', new_product_path %>
+<%= link_to 'New service', new_service_path %>

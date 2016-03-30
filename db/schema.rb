@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131235348) do
+ActiveRecord::Schema.define(version: 20160330185803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,11 @@ ActiveRecord::Schema.define(version: 20160131235348) do
     t.boolean  "no_customer_email_address"
     t.string   "primary_phone_number"
     t.string   "secondary_phone_number"
+    t.string   "mobile_phone"
+    t.string   "fax"
+    t.boolean  "is_business"
+    t.string   "referral_source"
+    t.string   "company_name"
   end
 
   create_table "addresses", force: :cascade do |t|

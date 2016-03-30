@@ -1,0 +1,42 @@
+<h1>Listing Accounts</h1>
+
+<table>
+    <th style="padding:0 15px 0 15px;">Customer</th>
+    <th style="padding:0 15px 0 15px;">Service Address</th>
+    <th style="padding:0 15px 0 15px;">Phone<br />Number</th>
+    <th style="padding:0 15px 0 15px;">Time/Date<br />Created</th>
+    <th style="padding:0 15px 0 15px;">&nbsp;</th>
+<% @accounts.each do |account| %>
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+
+    <td class='list_name' style="padding:0 15px 0 15px;">
+        <%= link_to account.name.to_s, account %>
+      <%# image_tag(account.image_url, class: 'list_image') %>
+    </td>
+
+    <td class="list_address" style="padding:0 15px 0 15px;">
+        <ul style="list-style-type: none;">
+            <% account.addresses.each do |addr| %>
+            <li><%= addr.postal %></li>
+            <% end %>
+        </ul>
+        </td>
+
+    <td class="list_phone" style="padding:0 15px 0 15px;">
+        <%= "#{account.primary_phone_number}" %>
+    </td>
+
+    <td class="list_created_at" style="padding:0 15px 0 15px;">
+      <%= account.local_genesis %><br/>
+    </td>
+
+    <td class="list_created_at" style="padding:0 15px 0 15px;"  >
+      <%= link_to 'Edit', edit_account_path(account) %><br/>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New account', new_account_path %>
