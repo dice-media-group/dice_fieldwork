@@ -1,0 +1,33 @@
+<h1>ServiceAgreements#show</h1>
+<p>Find me in app/views/service_agreements/show.html.erb</p>
+              <div class="row">
+                <div class="col-md-4">
+                  <h2>Customer Information</h2>
+                  <%= render :partial => 'customer_info' %>
+                  <h2>Payment Information</h2>
+                  <%= render :partial => 'payment_info' %>
+                  <ul>
+                      <li>
+                          <%= @agreement.credit_card_signature %>
+                      </li>
+                  </ul>
+                  <hr></hr>
+                  <%= render :partial => 'big_tom_contact_info' %>
+                </div>
+                <div class="col-md-4">
+                    <%= render :partial => 'list_of_pests' %>
+                </div>
+                <div class="col-md-4">
+                  <h2>Big Toms Pest Control</h2>
+                  <h3>#1 in Pest Control Service</h3>
+                  <div id="fieldtech_name" >
+                      <em>fieldtech name goes here</em>
+                  </div>
+                  <div id="satisfaction_guarantee">
+                      <%= render :partial => 'satisfaction_guarantee' %>
+                      <p>Initial <%= @agreement.satisfaction_guarantee_initials %>________</p>
+                  </div>
+
+                </div>
+              </div>
+  

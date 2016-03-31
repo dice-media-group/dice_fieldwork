@@ -14,6 +14,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
+    @agreement = @account.service_agreements.first
   end
 
   # GET /accounts/new

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330185803) do
+ActiveRecord::Schema.define(version: 20160331170200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,10 @@ ActiveRecord::Schema.define(version: 20160330185803) do
     t.boolean  "is_business"
     t.string   "referral_source"
     t.string   "company_name"
+    t.integer  "account_id"
   end
+
+  add_index "accounts", ["account_id"], name: "index_accounts_on_account_id", using: :btree
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street_one"
@@ -141,6 +144,19 @@ ActiveRecord::Schema.define(version: 20160330185803) do
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
+  create_table "service_agreements", force: :cascade do |t|
+    t.text     "field_tech_signature"
+    t.text     "customer_signature"
+    t.text     "customers_initials_for_charges"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.text     "satisfaction_guarantee_initials"
+    t.integer  "account_id"
+    t.text     "credit_card_signature"
+  end
+
+  add_index "service_agreements", ["account_id"], name: "index_service_agreements_on_account_id", using: :btree
+
   create_table "services", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -171,4 +187,6 @@ ActiveRecord::Schema.define(version: 20160330185803) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "accounts", "accounts"
+  add_foreign_key "service_agreements", "accounts"
 end
