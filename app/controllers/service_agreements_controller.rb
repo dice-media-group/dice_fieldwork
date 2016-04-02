@@ -12,6 +12,8 @@ class ServiceAgreementsController < ApplicationController
   end
 
   def new
+    # render layout: false
+    
     @account = Account.find(params[:account_id])
     @service_agreement = @account.service_agreements.build
   end
@@ -53,7 +55,8 @@ class ServiceAgreementsController < ApplicationController
         :customers_initials_for_charges,
         :satisfaction_guarantee_initials,
         :account_id,
-        :credit_card_signature
+        :credit_card_signature,
+        :scorpion
       )
     end
   
