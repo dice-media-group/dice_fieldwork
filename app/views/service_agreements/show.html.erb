@@ -1,16 +1,16 @@
-<h1>ServiceAgreements#show</h1>
+<h1>Service Agreement</h1>
 
   <div class="row">
     <div class="col-md-4">
       <h2>Customer Information</h2>
-      <%= render :partial => 'customer_info' %>
+      <%= render :partial => 'customer_info', locals: {billing_location: @billing_address } %>
       <h2>Payment Information</h2>
-      <%= render :partial => 'payment_info' %>
+      <%= render :partial => 'payment_info', locals: {billing_address: @billing_address, payment_method: @payment_method } %>
       <div class="sigPad signed">
         <div class="sigWrapper">
           <canvas class="pad" width="198" height="55"></canvas>
         </div>
-        <p><%= @agreement.account.name %></p>
+        <p><%= @account.name %></p>
       </div>
 
       <hr></hr>

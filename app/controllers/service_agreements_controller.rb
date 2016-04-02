@@ -22,7 +22,11 @@ class ServiceAgreementsController < ApplicationController
   end
 
   def show
-    @agreement = ServiceAgreement.find(params[:id])
+    @agreement  = ServiceAgreement.find(params[:id])
+    @account    = @agreement.account
+    @billing_address  = Address.find_billing_location(@account.addresses)
+    @service_address  = Address.find_service_location(@account.addresses)
+    @payment_method   = PaymentMethod.find_payment_method(@account.payment_methods)
   end
 
   def create

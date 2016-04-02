@@ -8,6 +8,7 @@ class Account < ActiveRecord::Base
   has_many :consultations
   has_many :users, :through => :consultations
   has_many :service_agreements
+  has_many :payment_methods
   def name
     "#{last_name}, #{first_name}"
   end

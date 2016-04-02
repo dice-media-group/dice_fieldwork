@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401011900) do
+ActiveRecord::Schema.define(version: 20160402182342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,18 @@ ActiveRecord::Schema.define(version: 20160401011900) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payment_methods", force: :cascade do |t|
+    t.string   "card_number"
+    t.string   "expiration"
+    t.string   "cvc"
+    t.string   "card_type"
+    t.integer  "account_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "payment_methods", ["account_id"], name: "index_payment_methods_on_account_id", using: :btree
+
   create_table "profiles", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -192,5 +204,6 @@ ActiveRecord::Schema.define(version: 20160401011900) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "accounts", "accounts"
+  add_foreign_key "payment_methods", "accounts"
   add_foreign_key "service_agreements", "accounts"
 end

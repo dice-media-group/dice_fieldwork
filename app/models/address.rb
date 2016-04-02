@@ -10,14 +10,42 @@ class Address < ActiveRecord::Base
     "#{street_one}, #{street_two}, #{city}, #{state}, #{postal_code}"
   end
   
-  def find_service_location
-    addr      = addresses.where(is_billing: false).first
-    # svc_loc   =
-    # .city.to_s# .street_one.to_s
-    # "#{addr.street_one}" #", #{addr.street_two,} #{addr.city}, #{addr.state}  #{addr.postal_code}"
+  def self.service_locations
+    where(is_billing: false)
   end
   
-  def find_first_billing_location
+  def self.find_service_location(addresses)
+    addresses         = Array(addresses.where(is_billing: false))
+    if
+      Array(addresses).count > 0
+      address = addresses.first
+    else
+      address =  self.missing_address
+    end
+    return address
+  end
+  
+  def self.billing_locations
+    where(is_billing: true)
+  end
+  
+  def self.find_billing_location(addresses)
+    addresses         = Array(addresses.where(is_billing: true))
+    if
+      Array(addresses).count > 0
+      address = addresses.first
+    else
+      address =  self.missing_address
+    end
+    return address
     
+  end
+  
+  def self.missing_address
+    OpenStruct.new(:street_one => "", 
+            :street_two => "", 
+            :city => "", 
+            :state => "", 
+            :postal_code => "")    
   end
 end
