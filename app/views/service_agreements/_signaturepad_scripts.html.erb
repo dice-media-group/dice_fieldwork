@@ -1,0 +1,8 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<%= javascript_include_tag "jquery.signaturepad.js", :cache => true %>
+<script>
+  $(document).ready(function() {
+    $('.sigPad').signaturePad({drawOnly:true});
+  });
+</script>
+  <%= javascript_include_tag "json2.min.js", :cache => true %>

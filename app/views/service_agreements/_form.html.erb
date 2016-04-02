@@ -1,10 +1,3 @@
-    <!-- t.string   "first_name"
-    t.string   "last_name"
-    t.text     "email"
-    t.boolean  "no_customer_email_address"
-    t.string   "primary_phone_number"
-    t.string   "secondary_phone_number" -->
-
 <%= form_for [@account, @service_agreement] do |f| %>
   <% if @service_agreement.errors.any? %>
     <div id="error_explanation">
@@ -25,11 +18,23 @@
                   <%= render :partial => 'customer_info' %>
                   <h2>Payment Information</h2>
                   <%= render :partial => 'payment_info' %>
-                  <ul>
-                      <li>
-                          <%= f.text_field :credit_card_signature %>
-                      </li>
-                  </ul>
+    <div class="sigPad">
+      <label for="name">Print your name</label>
+      <input type="text" name="name" id="name" class="name">
+      <p class="typeItDesc">Review your signature</p>
+      <p class="drawItDesc">Draw your signature</p>
+      <ul class="sigNav">
+        <li class="typeIt"><a href="#type-it" class="current">Type It</a></li>
+        <li class="drawIt"><a href="#draw-it" >Draw It</a></li>
+        <li class="clearButton"><a href="#clear">Clear</a></li>
+      </ul>
+      <div class="sig sigWrapper">
+        <div class="typed"></div>
+        <canvas class="pad" width="198" height="55"></canvas>
+        <%= f.hidden_field :credit_card_signature, class: "output"  %>
+        
+      </div>
+    </div>
                   <hr></hr>
                   <%= render :partial => 'big_tom_contact_info' %>
                 </div>
@@ -44,7 +49,48 @@
                   </div>
                   <div id="satisfaction_guarantee">
                       <%= render :partial => 'satisfaction_guarantee' %>
-                      <p>Initial <%= f.text_field :satisfaction_guarantee_initials %>________</p>
+    <div class="sigPad">
+      <label for="name">Print your initials</label>
+      <input type="text" name="name" id="name" class="name">
+      <p class="typeItDesc">Review your signature</p>
+      <p class="drawItDesc">Draw your signature</p>
+      <ul class="sigNav">
+        <li class="typeIt"><a href="#type-it" class="current">Type It</a></li>
+        <li class="drawIt"><a href="#draw-it" >Draw It</a></li>
+        <li class="clearButton"><a href="#clear">Clear</a></li>
+      </ul>
+      <div class="sig sigWrapper">
+        <div class="typed"></div>
+        <canvas class="pad" width="198" height="55"></canvas>
+        <%= f.hidden_field :satisfaction_guarantee_initials, class: "output"  %>
+        
+      </div>
+    </div>
+                  <hr></hr>
+                    
+                  </div>
+                  <hr></hr></p>
+                  </div>
+                  <div id="additional-fees">
+                      <h2>Additional Fees</h2>
+                      <ul>
+                          <li>
+                              <%= check_box_tag(:mice_and_rat_warranty) %>
+                              <%= label_tag(:mice_and_rat_warranty, "Mice and Rat Warranty $59.99") %>
+                          </li>
+                          <li>
+                              <%= check_box_tag(:scorpion) %>
+                              <%= label_tag(:scorpion, "Scorpion $59.99") %>
+                          </li>
+                          <li>
+                              <%= check_box_tag(:cockroach) %>
+                              <%= label_tag(:cockroach, "Cockroach $59.99") %>
+                          </li>
+                          <li>
+                              <%= check_box_tag(:bed_bugs) %>
+                              <%= label_tag(:bed_bugs, "Bed Bugs$174.99 per room") %>
+                          </li>
+                      </ul>
                   </div>
 
                 </div>
@@ -60,7 +106,8 @@
   </div>
 <% end %>
 
-
+<%= render :partial => 'signaturepad_scripts' %>
+    
 <!-- <form accept-charset="UTF-8" action="/accounts/23310" autocomplete="off" class="edit_account" id="edit_account_23310" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put"><input name="authenticity_token" type="hidden" value="cTs1/RDZA2LmFOgxGrJz4rpBOSazkL7xmzttAXA9yZI="></div>
 
   <fieldset id="service_agreement_customer_information">

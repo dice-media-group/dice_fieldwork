@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DiceFieldwork</title>
+  <title>Dice Fieldwork</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 <!-- -->
 
@@ -56,7 +55,9 @@
             </div><!--/.navbar-collapse -->
           </div>
         </nav>
-        <%= yield %>
+        <div class="container">
+            <%= yield %>
+        </div>
           <hr>
 
           <footer>
@@ -68,11 +69,10 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-        <script src="../../dist/js/bootstrap.min.js"></script>
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+        <%= javascript_include_tag 'application' %>
+        <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> 
   
 
     <button style="padding: 4px 6px;position: absolute;left: 141px;top: 840px;background-color: #F7F7F7;  background: linear-gradient(#FFF, #F0F0F0);  border: 1px solid #CCC;  color: #5F5F5F;  cursor: pointer;  font-weight: bold;  text-shadow: 0 1px #FFF;  white-space: nowrap;border-radius: 3px;font-size: 11px; display: none; z-index: 8675309" class="tw-schedule-btn" id="tw_schedule_btn"><em style="background-image: url('//www.tailwindapp.com/app/extensions/Tailwind_swoosh.png'); width: 16px;height: 16px;margin-top: -4px; display: inline-block; position: relative; vertical-align:middle;background-size: 16px;"></em><span>Schedule</span></button>

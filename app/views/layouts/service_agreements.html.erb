@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Service Agreement</title>
+  <title>Dice Fieldwork</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag "jquery.signaturepad.css", :cache => true %>
+  
   <%= csrf_meta_tags %>
 <!-- -->
 
@@ -56,67 +57,12 @@
             </div><!--/.navbar-collapse -->
           </div>
         </nav>
-        <section id="meat">
-
+        <div class="container">
             <%= yield %>
-
-        </section>
+        </div>
           <hr>
 
           <footer>
-              <!-- Example row of columns -->
-              <div class="row">
-                <div class="col-md-4">
-                  <h2>Learn More</h2>
-                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                  <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-                </div>
-                <div class="col-md-4">
-                    Little Black Ant<br />
-                    Pharaoh Ant<br />
-                    Velvety Tree Ant<br />
-                    Odorous House Ant<br />
-                    Harvester Ant<br />
-                    Field Cricket<br />
-                    House Cricket<br />
-                    Earwig Pillbug/Sowbug<br />
-                    Black Widow Spider<br />
-                    Brown Recluse Spider<br />
-                    Wolf Spider<br />
-                    Orb Weaver Spider<br /> 
-                    House Spider<br />
-                    Cellar Spider<br />
-                    Jumping Spider<br />
-                    Camel Spiders<br />
-                    Trapdoor Spider<br />
-                    American Dog Tick<br />
-                    Brown Dog Tick<br />
-                    Paper Wasp<br />
-                    Mud Dauber Wasp<br />
-                    Yellow Jacket<br />
-                    American Cockroach<br />
-                    German cockroach<br />
-                    Brown-Banded Roach<br />
-                    Oriental Cockroach<br />
-                    Smokey-Brown Roach<br />
-                    Cat Flea<br />
-                    Dog Flea Scorpion               
-                </div>
-                <div class="col-md-4">
-                  <h2>Big Toms Pest Control</h2>
-                  <h3>#1 in Pest Control Service</h3>
-                  <div id="fieldtech_name" >
-                      <em>fieldtech name goes here</em>
-                  </div>
-                  <div id="satisfaction_guarantee">
-                      <p>Big Toms Pest Control will treat your home every 60 to 90 days from your last service. However, if at any time a pest shows up, WE will promptly take action to fix the issue at no additional cost. This is an unlimited, all inclusive,
-Satisfaction Guaranteed plan. Initial________</p>
-                  </div>
-
-                  <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-                </div>
-              </div>
-              
             <p>© 2015 Company, Inc.</p>
           </footer>
         </div> <!-- /container -->
@@ -125,11 +71,10 @@ Satisfaction Guaranteed plan. Initial________</p>
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-        <script src="../../dist/js/bootstrap.min.js"></script>
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+        <%# javascript_include_tag 'application' %>
+        <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> 
   
 
     <button style="padding: 4px 6px;position: absolute;left: 141px;top: 840px;background-color: #F7F7F7;  background: linear-gradient(#FFF, #F0F0F0);  border: 1px solid #CCC;  color: #5F5F5F;  cursor: pointer;  font-weight: bold;  text-shadow: 0 1px #FFF;  white-space: nowrap;border-radius: 3px;font-size: 11px; display: none; z-index: 8675309" class="tw-schedule-btn" id="tw_schedule_btn"><em style="background-image: url('//www.tailwindapp.com/app/extensions/Tailwind_swoosh.png'); width: 16px;height: 16px;margin-top: -4px; display: inline-block; position: relative; vertical-align:middle;background-size: 16px;"></em><span>Schedule</span></button>
