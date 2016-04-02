@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  get 'notes/index'
 
-  get 'notes/new'
+  devise_for :users
+  resources :services, :orders, :line_items, :carts, :consultations
 
   resources :accounts do
     resources :notes, only: [:index, :new]
+    resources :service_agreements, shallow: true
+    # resources :consultations, only: [:index, :new]
   end
-  devise_for :users
   mount RailsAdmin::Engine => '/backstage', as: 'rails_admin'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

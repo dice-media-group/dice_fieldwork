@@ -5,8 +5,10 @@ ruby '2.2.2'
 gem 'rails', '4.2.5'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
+# Use twitter-bootstrap
+# gem 'bootstrap-sass', '~> 3.3.6'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '>= 3.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -39,8 +41,10 @@ group :development, :test do
   ## gems for app
   # gem 'minitest-spec-rails'
   gem 'rspec-rails', '~> 3.4'
+  gem 'rspec-collection_matchers', '~> 1.1', '>= 1.1.2'
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'shoulda-matchers'
   # Pretty printed test output
   gem 'turn', :require => false
   
@@ -67,16 +71,24 @@ end
 gem 'rails_12factor', '~> 0.0.3'
 gem 'rails_admin', '~> 0.7.0'
 # gem 'paper_trail', '~> 4.0.0'
+
+# authentication
 gem 'devise', '~> 3.5', '>= 3.5.2'
-gem 'shopify_app', '~> 6.3'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 
+# authorization
+gem 'cancancan', '~> 1.13', '>= 1.13.1'
 
+# asset upload
 gem 'carrierwave', '~> 0.10.0'
 gem 'rmagick', '~> 2.15', '>= 2.15.4'
+
+# scheduling
+gem 'ice_cube', '~> 0.13.3'
+
 # frontend
 # source 'https://rails-assets.org' do
 #   gem 'rails-assets-bootstrap'

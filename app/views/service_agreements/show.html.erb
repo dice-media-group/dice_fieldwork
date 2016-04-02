@@ -1,0 +1,111 @@
+<h1>ServiceAgreements#show</h1>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Customer Information</h2>
+      <%= render :partial => 'customer_info' %>
+      <h2>Payment Information</h2>
+      <%= render :partial => 'payment_info' %>
+      <div class="sigPad signed">
+        <div class="sigWrapper">
+          <canvas class="pad" width="198" height="55"></canvas>
+        </div>
+        <p><%= @agreement.account.name %></p>
+      </div>
+
+      <hr></hr>
+      <%= render :partial => 'big_tom_contact_info' %>
+    </div>
+    <div class="col-md-4">
+        <%= render :partial => 'list_of_pests' %>
+    </div>
+    <div class="col-md-4">
+      <h2>Big Toms Pest Control</h2>
+      <h3>#1 in Pest Control Service</h3>
+      <div id="fieldtech_name" >
+          <em>fieldtech name goes here</em>
+      </div>
+      <div id="satisfaction_guarantee">
+          <%= render :partial => 'satisfaction_guarantee' %>
+          <p>Satisfaction Guarantee Initials</p>
+      <div class="initialPad signed">
+        <div class="sigWrapper">
+          <canvas class="pad" width="198" height="55"></canvas>
+        </div>
+      </div>
+
+          
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+          <%= render :partial => 'terms_of_service' %>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-6">
+<!--Field tech signature -->
+          Field tech signature here<br />
+          <%= @agreement.created_at.strftime( "%D" ) %><br />
+          <br />
+          
+          <div class="fieldTechPad signed">
+            <div class="sigWrapper">
+              <canvas class="pad" width="198" height="55"></canvas>
+            </div>
+          </div>
+          
+          <!-- <div class="sigPad signed">
+            <div class="sigWrapper">
+              <canvas class="pad" width="198" height="55"></canvas>
+            </div>
+            <p><%= @agreement.account.name %></p>
+          </div> -->
+      </div>
+      <div class="col-md-6">
+<!--customer signature -->
+          <%=" #{@agreement.account.first_name} #{@agreement.account.last_name}" %><br />
+          <%= @agreement.created_at.strftime( "%D" ) %><br />
+          <br />
+          <div class="customerSigPad signed">
+            <div class="sigWrapper">
+              <canvas class="pad" width="198" height="55"></canvas>
+            </div>
+          </div>
+          <br />
+          
+          <!-- <div class="sigPad signed">
+            <div class="sigWrapper">
+              <canvas class="pad" width="198" height="55"></canvas>
+            </div>
+            <p><%= @agreement.account.name %></p>
+          </div> -->
+      </div>
+  </div>
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+  <script src="https://thomasjbradley.github.io/signature-pad/jquery.signaturepad.js"></script>
+  <script>
+      credit_card_signature = <%= raw @agreement.credit_card_signature %>
+    $(document).ready(function() {
+      $('.sigPad').signaturePad({displayOnly:true}).regenerate(credit_card_signature);
+    });
+
+    satisfaction_guarantee_initials = <%= raw @agreement.satisfaction_guarantee_initials %>
+    $(document).ready(function() {
+      $('.initialPad').signaturePad({displayOnly:true}).regenerate(satisfaction_guarantee_initials);
+    });
+
+    field_tech_signature = <%= raw @agreement.field_tech_signature %>
+    $(document).ready(function() {
+      $('.fieldTechPad').signaturePad({displayOnly:true}).regenerate(field_tech_signature);
+    });
+
+    customer_signature = <%= raw @agreement.customer_signature %>
+    $(document).ready(function() {
+      $('.customerSigPad').signaturePad({displayOnly:true}).regenerate(customer_signature);
+    });
+
+  </script>
+  <script src="https://thomasjbradley.github.io/signature-pad/assets/json2.min.js"></script>
