@@ -21,13 +21,9 @@
               <h2>Payment Information</h2>
               <%# render :partial => 'payment_info' %>
               <div class="sigPad">
-                  <label for="name">Print your name</label>
-                  <input type="text" name="name" id="name" class="name">
                   <p class="typeItDesc">Review your signature</p>
                   <p class="drawItDesc">Draw your signature</p>
                   <ul class="sigNav">
-                    <li class="typeIt"><a href="#type-it" class="current">Type It</a></li>
-                    <li class="drawIt"><a href="#draw-it" >Draw It</a></li>
                     <li class="clearButton"><a href="#clear">Clear</a></li>
                   </ul>
                   <div class="sig sigWrapper">
@@ -52,19 +48,21 @@
             <div class="col-md-4">
               <h2>Big Toms Pest Control</h2>
               <h3>#1 in Pest Control Service</h3>
-              <div id="fieldtech_name" >
-                  <em>fieldtech name goes here</em>
+              <div id="fieldtech_name" class ="row">
+              <table class="table table-bordered">
+                  <tr>
+                      <td>
+                          <p><strong>Field Technician</strong></p>
+                          <em><%= current_user.name %></em>
+                      </td>
+                  </tr>
+              </table>
               </div>
-              <div id="satisfaction_guarantee">
+              <div id="satisfaction_guarantee" class="row">
                 <%= render :partial => 'satisfaction_guarantee' %>
                 <div class="sigPad">
-                  <label for="name">Print your initials</label>
-                  <input type="text" name="name" id="name" class="name">
-                  <p class="typeItDesc">Review your signature</p>
-                  <p class="drawItDesc">Draw your signature</p>
+                  <p class="drawItDesc">Draw your initials</p>
                   <ul class="sigNav">
-                    <li class="typeIt"><a href="#type-it" class="current">Type It</a></li>
-                    <li class="drawIt"><a href="#draw-it" >Draw It</a></li>
                     <li class="clearButton"><a href="#clear">Clear</a></li>
                   </ul>
                   <div class="sig sigWrapper">
@@ -89,17 +87,45 @@
   </div>
   <div class="row">
       <div class="col-md-4">
-          <p>tech signature here</p>
-          <p><%# "#{current_user.name}, Field Technician" if current_user.name %></p>
-          <p><%= Date.current.to_formatted_s(:long) %></p>
+          <div class="row">
+              <div class="sigPad">
+                  <ul class="sigNav">
+                    <li class="clearButton"><a href="#clear">Clear</a></li>
+                  </ul>
+                  <div class="sig sigWrapper">
+                    <div class="typed"></div>
+                    <canvas class="pad" width="198" height="55"></canvas>
+                    <%= f.hidden_field :field_tech_signature, class: "output"  %>
+
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <p><%= "#{current_user.name}, Field Technician" if current_user %></p>
+              <p><%= Date.current.to_formatted_s(:long) %></p>
+          </div>
       </div>
       <div class="col-md-2">
           
       </div>
       <div class="col-md-4">
-          customer signature here
-          <p><%= "#{@account.first_name} #{@account.last_name}" if @account %></p>
-          <p><%= Date.current.to_formatted_s(:long) %></p>
+          <div class="row">
+              <div class="sigPad">
+                  <ul class="sigNav">
+                    <li class="clearButton"><a href="#clear">Clear</a></li>
+                  </ul>
+                  <div class="sig sigWrapper">
+                    <div class="typed"></div>
+                    <canvas class="pad" width="198" height="55"></canvas>
+                    <%= f.hidden_field :customer_signature, class: "output"  %>
+
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <p><%= "#{@account.first_name} #{@account.last_name}" if @account %></p>
+              <p><%= Date.current.to_formatted_s(:long) %></p>
+          </div>
       </div>
   </div>
       <div class="actions">

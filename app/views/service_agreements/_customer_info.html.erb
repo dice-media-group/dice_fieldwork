@@ -1,6 +1,8 @@
 <ul>
-    <li>Business <%= account.company_name if account %> </li>
     <li>Name <%= account.name %> </li>
+    <% if account.is_business? %>
+    <li><%= "Business: #{account.company_name}" if account.is_business? %> </li>    
+    <% end %>
     <li>
         <%= "#{service_address.street_one}" %><br />
         <%= "#{service_address.street_two}" %><br />
