@@ -68,7 +68,8 @@ class ServiceAgreementsController < ApplicationController
         :satisfaction_guarantee_initials,
         :account_id,
         :credit_card_signature,
-        :scorpion
+        :scorpion,
+        :notes => [:content]
       )
     end
   

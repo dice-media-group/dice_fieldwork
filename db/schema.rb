@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406004330) do
+ActiveRecord::Schema.define(version: 20160406133057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,13 +122,11 @@ ActiveRecord::Schema.define(version: 20160406004330) do
     t.text     "content"
     t.integer  "notable_id"
     t.string   "notable_type"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.integer  "service_agreement_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "notes", ["notable_type", "notable_id"], name: "index_notes_on_notable_type_and_notable_id", using: :btree
-  add_index "notes", ["service_agreement_id"], name: "index_notes_on_service_agreement_id", using: :btree
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "service_id"
@@ -237,7 +235,6 @@ ActiveRecord::Schema.define(version: 20160406004330) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "accounts", "accounts"
-  add_foreign_key "notes", "service_agreements"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "services"
   add_foreign_key "orders", "order_statuses"
