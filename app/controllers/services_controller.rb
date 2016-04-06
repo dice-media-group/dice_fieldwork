@@ -23,6 +23,7 @@ class ServicesController < ApplicationController
 
   # GET /services/1/edit
   def edit
+    @services = Service.all
   end
 
   # POST /services
@@ -32,8 +33,8 @@ class ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.save
-        format.html { redirect_to @service,
-          notice: 'Service was successfully created.' }
+        format.html { redirect_to [@service],
+          notice: 'Service details were successfully created.' }
         format.json { render action: 'show', status: :created,
           location: @service }
       else

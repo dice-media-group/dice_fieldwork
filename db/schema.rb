@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402182342) do
+ActiveRecord::Schema.define(version: 20160406155739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,11 +128,37 @@ ActiveRecord::Schema.define(version: 20160402182342) do
 
   add_index "notes", ["notable_type", "notable_id"], name: "index_notes_on_notable_type_and_notable_id", using: :btree
 
-  create_table "orders", force: :cascade do |t|
-    t.string   "pay_type"
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "service_id"
+    t.integer  "order_id"
+    t.decimal  "unit_price",  precision: 12, scale: 3
+    t.integer  "quantity"
+    t.decimal  "total_price", precision: 12, scale: 3
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+  add_index "order_items", ["service_id"], name: "index_order_items_on_service_id", using: :btree
+
+  create_table "order_statuses", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "pay_type"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.decimal  "subtotal",        precision: 12, scale: 3
+    t.decimal  "tax",             precision: 12, scale: 3
+    t.decimal  "shipping",        precision: 12, scale: 3
+    t.decimal  "total",           precision: 12, scale: 3
+    t.integer  "order_status_id"
+  end
+
+  add_index "orders", ["order_status_id"], name: "index_orders_on_order_status_id", using: :btree
 
   create_table "payment_methods", force: :cascade do |t|
     t.string   "card_number"
@@ -176,12 +202,17 @@ ActiveRecord::Schema.define(version: 20160402182342) do
   create_table "services", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.decimal  "price",       precision: 10, scale: 2
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.decimal  "price",                                precision: 12, scale: 3, null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+    t.integer  "service_agreement_id"
+    t.date     "part_of_service_agreement_start_date"
+    t.date     "part_of_service_agreement_end_date"
+    t.boolean  "active"
   end
 
   add_index "services", ["name"], name: "index_services_on_name", unique: true, using: :btree
+  add_index "services", ["service_agreement_id"], name: "index_services_on_service_agreement_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -198,12 +229,18 @@ ActiveRecord::Schema.define(version: 20160402182342) do
     t.datetime "updated_at",                             null: false
     t.boolean  "is_admin",               default: false
     t.boolean  "is_sales_rep",           default: false
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "accounts", "accounts"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "services"
+  add_foreign_key "orders", "order_statuses"
   add_foreign_key "payment_methods", "accounts"
   add_foreign_key "service_agreements", "accounts"
+  add_foreign_key "services", "service_agreements"
 end

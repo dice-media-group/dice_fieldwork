@@ -3,10 +3,14 @@
   <div class="row">
     <div class="col-md-4">
       <h2>Customer Information</h2>
-      <%= render :partial => 'customer_info', locals: {billing_location: @billing_address } %>
+      <% if @service_address && @account %>
+          <%= render :partial => 'customer_info', locals: {service_address: @service_address, account: @account }  %>
+      <% end %>
       <h2>Payment Information</h2>
+      <% if @billing_address && @payment_method %>
       <%= render :partial => 'payment_info', locals: {billing_address: @billing_address, payment_method: @payment_method } %>
-      <div class="sigPad signed">
+      <% end %>
+      <div class="creditCardSigPad signed">
         <div class="sigWrapper">
           <canvas class="pad" width="198" height="55"></canvas>
         </div>
@@ -47,34 +51,36 @@
   <div class="row">
       <div class="col-md-6">
 <!--Field tech signature -->
-          Field tech signature here<br />
-          <%= @agreement.created_at.strftime( "%D" ) %><br />
-          <br />
-          
-          <div class="fieldTechPad signed">
-            <div class="sigWrapper">
-              <canvas class="pad" width="198" height="55"></canvas>
-            </div>
+          <div class ="row partys_signature">
+              <div class="fieldTechSigPad signed">
+                <div class="sigWrapper">
+                  <canvas class="pad" width="198" height="55"></canvas>
+                </div>
+              </div>
+          </div>
+          <div class ="row printed_name_of_signature">
+            <p><%= current_user.name %></p>
+          </div>
+          <div class="row signing_date">
+              <%= @agreement.created_at.strftime( "%D" ) %><br />
           </div>
           
-          <!-- <div class="sigPad signed">
-            <div class="sigWrapper">
-              <canvas class="pad" width="198" height="55"></canvas>
-            </div>
-            <p><%= @agreement.account.name %></p>
-          </div> -->
       </div>
       <div class="col-md-6">
 <!--customer signature -->
-          <%=" #{@agreement.account.first_name} #{@agreement.account.last_name}" %><br />
-          <%= @agreement.created_at.strftime( "%D" ) %><br />
-          <br />
-          <div class="customerSigPad signed">
-            <div class="sigWrapper">
-              <canvas class="pad" width="198" height="55"></canvas>
-            </div>
+          <div class ="row partys_signature">
+              <div class="customerSigPad signed">
+                <div class="sigWrapper">
+                  <canvas class="pad" width="198" height="55"></canvas>
+                </div>
+              </div>
           </div>
-          <br />
+          <div class ="row printed_name_of_signature">
+            <p><%= @account.name %></p>
+          </div>
+          <div class="row signing_date">
+              <%= @agreement.created_at.strftime( "%D" ) %><br />
+          </div>
           
           <!-- <div class="sigPad signed">
             <div class="sigWrapper">
@@ -89,7 +95,7 @@
   <script>
       credit_card_signature = <%= raw @agreement.credit_card_signature %>
     $(document).ready(function() {
-      $('.sigPad').signaturePad({displayOnly:true}).regenerate(credit_card_signature);
+      $('.creditCardSigPad').signaturePad({displayOnly:true}).regenerate(credit_card_signature);
     });
 
     satisfaction_guarantee_initials = <%= raw @agreement.satisfaction_guarantee_initials %>
@@ -99,7 +105,7 @@
 
     field_tech_signature = <%= raw @agreement.field_tech_signature %>
     $(document).ready(function() {
-      $('.fieldTechPad').signaturePad({displayOnly:true}).regenerate(field_tech_signature);
+      $('.fieldTechSigPad').signaturePad({displayOnly:true}).regenerate(field_tech_signature);
     });
 
     customer_signature = <%= raw @agreement.customer_signature %>
