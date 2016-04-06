@@ -30,8 +30,8 @@ class ServiceAgreementsController < ApplicationController
   def show
     @agreement  = ServiceAgreement.find(params[:id])
     @account    = @agreement.account
-    @billing_address  = Address.find_billing_location(@account.addresses)
-    @service_address  = Address.find_service_location(@account.addresses)
+    @billing_address  = @account.addresses.all.find_billing_location(@account.addresses)
+    @service_address  = @account.addresses.all.find_service_location(@account.addresses)
     @payment_method   = PaymentMethod.find_payment_method(@account.payment_methods)
     @order_items = current_order.order_items
     
