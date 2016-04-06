@@ -15,9 +15,11 @@
               <div class="row">
                 <div class="col-md-4">
                   <h2>Customer Information</h2>
-                  <%= render :partial => 'customer_info' %>
+                  <% if @service_address && @account %>
+                  <%= render :partial => 'customer_info', locals: {service_address: @service_address, account: @account }  %>
+                  <% end %>
                   <h2>Payment Information</h2>
-                  <%= render :partial => 'payment_info' %>
+                  <%# render :partial => 'payment_info' %>
     <div class="sigPad">
       <label for="name">Print your name</label>
       <input type="text" name="name" id="name" class="name">
@@ -40,6 +42,12 @@
                 </div>
                 <div class="col-md-4">
                     <%= render :partial => 'list_of_pests' %>
+                    <!--notes -->
+                    <h2>Notes</h2>
+                    <%= f.fields_for :notes do |notes_form| %>
+                        <%= notes_form.text_area :content, size: "24x6" %>
+                    <% end %>
+                    
                 </div>
                 <div class="col-md-4">
                   <h2>Big Toms Pest Control</h2>
@@ -96,51 +104,6 @@
                 </div>
               </div>
   
-  <div class="row">
-      <div class="col-md-12">
-          <%= render :partial => 'terms_of_service' %>
-      </div>
-  </div>
-    <div class="row">
-        <div class="col-md-6">
-  <!--Field tech signature -->
-            <div class="sigPad">
-              <label for="name">Field Tech name</label>
-              <input type="text" name="name" id="name" class="name">
-              <p class="typeItDesc">Review your signature</p>
-              <p class="drawItDesc">Draw your signature</p>
-              <ul class="sigNav">
-                <li class="drawIt"><a href="#draw-it" >Draw It</a></li>
-                <li class="clearButton"><a href="#clear">Clear</a></li>
-              </ul>
-              <div class="sig sigWrapper">
-                <div class="typed"></div>
-                <canvas class="pad" width="198" height="55"></canvas>
-                <%= f.hidden_field :field_tech_signature, class: "output"  %>
-        
-              </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-  <!--customer signature -->
-            <div class="sigPad">
-              <label for="name">Customer name</label>
-              <input type="text" name="name" id="name" class="name">
-              <p class="typeItDesc">Review your signature</p>
-              <p class="drawItDesc">Draw your signature</p>
-              <ul class="sigNav">
-                <li class="drawIt"><a href="#draw-it" >Draw It</a></li>
-                <li class="clearButton"><a href="#clear">Clear</a></li>
-              </ul>
-              <div class="sig sigWrapper">
-                <div class="typed"></div>
-                <canvas class="pad" width="198" height="55"></canvas>
-                <%= f.hidden_field :customer_signature, class: "output"  %>
-        
-              </div>
-            </div>
-        </div>
-    </div>
   
   <div class="actions">
     <%= f.submit %>

@@ -1,0 +1,21 @@
+<div class="well">
+
+  <div class="row">
+    <div class="col-xs-8">
+      <h4><%= service.name %></h4>
+    </div>
+    <div class="col-xs-4"  >
+        <%= form_for [agreement, order_item], remote: true, :authenticity_token => true  do |f| %>
+            <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency service.price %></span></h4>
+            <div class="input-group" id="<%= "service_" + service.id.to_s %>">
+                <%= f.hidden_field :quantity, value: 1, class: "form-control", min: 1 %>
+                <div class="input-group-btn">
+                  <%= f.hidden_field :service_id, value: service.id %>
+                  <%= f.submit "Add to Agreement", class: "btn btn-primary" %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+  </div>
+</div>

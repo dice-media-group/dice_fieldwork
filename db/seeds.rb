@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Service.delete_all
+Service.create! id: 1, name: "Banana", price: 0.49, part_of_service_agreement_start_date: Date.yesterday , part_of_service_agreement_end_date: Date.current + 200.years
+Service.create! id: 2, name: "Apple", price: 0.29, part_of_service_agreement_start_date: Date.yesterday , part_of_service_agreement_end_date: Date.current + 200.years
+Service.create! id: 3, name: "Carton of Strawberries", price: 1.99, part_of_service_agreement_start_date: Date.yesterday , part_of_service_agreement_end_date: Date.current + 200.years
+
+OrderStatus.delete_all
+OrderStatus.create! id: 1, name: "In Progress"
+OrderStatus.create! id: 2, name: "Placed"
+OrderStatus.create! id: 3, name: "Shipped"
+OrderStatus.create! id: 4, name: "Cancelled"

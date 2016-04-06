@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-12">
+        <%= render :partial => 'terms_of_service' %>
+    </div>
+</div>
+  <div class="row">
+      <div class="col-md-6">
+<!--Field tech signature -->
+          <div class="sigPad">
+            <label for="name">Field Tech name</label>
+            <input type="text" name="name" id="name" class="name">
+            <p class="typeItDesc">Review your signature</p>
+            <p class="drawItDesc">Draw your signature</p>
+            <ul class="sigNav">
+              <li class="drawIt"><a href="#draw-it" >Draw It</a></li>
+              <li class="clearButton"><a href="#clear">Clear</a></li>
+            </ul>
+            <div class="sig sigWrapper">
+              <div class="typed"></div>
+              <canvas class="pad" width="198" height="55"></canvas>
+              <%= f.hidden_field :field_tech_signature, class: "output"  %>
+    
+            </div>
+          </div>
+      </div>
+      <div class="col-md-6">
+<!--customer signature -->
+          <div class="sigPad">
+            <label for="name">Customer name</label>
+            <input type="text" name="name" id="name" class="name">
+            <p class="typeItDesc">Review your signature</p>
+            <p class="drawItDesc">Draw your signature</p>
+            <ul class="sigNav">
+              <li class="drawIt"><a href="#draw-it" >Draw It</a></li>
+              <li class="clearButton"><a href="#clear">Clear</a></li>
+            </ul>
+            <div class="sig sigWrapper">
+              <div class="typed"></div>
+              <canvas class="pad" width="198" height="55"></canvas>
+              <%= f.hidden_field :customer_signature, class: "output"  %>
+    
+            </div>
+          </div>
+      </div>
+  </div>
