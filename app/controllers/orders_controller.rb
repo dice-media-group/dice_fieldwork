@@ -15,7 +15,8 @@ class OrdersController < ApplicationController
   def update
     @order    = Order.find(session[:order_id])
     @agreement = ServiceAgreement.find(params[:id])
-    @order.service_agreement = @agreement
+    @order.service_agreement = @agreement if @agreement
+    @order.account           = @account   if @account
 
     respond_to do |format|
       if @order.update_attributes(order_params)
@@ -32,7 +33,7 @@ class OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white
     # list through.
     def order_params
-      params.require(:order).permit(:service_agreement_attributes => [:id])
+      params.require(:order).permit(:service_agreement_attributes => [:id], :account_attributes => [:id])
     end
   
 end

@@ -46,7 +46,7 @@ class ServiceAgreementsController < ApplicationController
 
     respond_to do |format|
       if @agreement.save
-        session[:order_id] = nil
+        session.delete(:order_id)
         format.html { redirect_to edit_service_agreement_path(@agreement),
           notice: 'Service agreement details were successfully created.' }
         format.json { render action: 'show', status: :created,
