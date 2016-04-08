@@ -1,0 +1,9 @@
+    <%= form_for [agreement, order_item], remote: true, :authenticity_token => true  do |f| %>
+            <%= f.hidden_field :quantity, value: 1, class: "form-control", min: 1 %>
+            <div class="input-group-btn">
+              <%= f.hidden_field :service_id, value: service.id %>
+              <div id="order_item_add_subtract_button_service_id_<%= service.id %>">
+                  <%= render :partial => 'services/add_to_agreement_submit_button' %>
+              </div>
+            </div>
+    <% end %>

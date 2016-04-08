@@ -37,7 +37,29 @@
           <canvas class="pad" width="198" height="55"></canvas>
         </div>
       </div>
-
+      <div class="row">
+          <h2>Additional Services</h2>
+          <% @order.order_items.each do |item| %>
+          <div class="col-md-6">
+              <%= "#{item.service.name}" %>
+          </div>
+          <div class="col-md-6">
+              <%= "$#{item.total_price}" %>
+          </div>
+          <% end %>
+          <div class="row">
+              <p>=================</p>
+          </div>
+          <div class="row">
+          <div class="col-md-6">
+              <p>SUBTOTAL</p>
+          </div>
+          <div class="col-md-6">
+              <%= "$#{@order.subtotal}" %>
+          </div>
+              
+          </div>
+      </div>
           
       </div>
 

@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'by_star', '~> 2.2', '>= 2.2.1' #date search
+
+gem 'gon', '~> 6.0', '>= 6.0.1' #move ruby vars into js
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

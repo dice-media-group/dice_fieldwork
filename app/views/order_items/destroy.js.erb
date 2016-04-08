@@ -1,2 +1,9 @@
+<% if @order.errors.any? || @order_item.errors.any? %>
+    alert("not valid.")
+<% else %>
+  service_element_id                                = "#service_<%= @order_item.service_id %>"
+order_item_add_subtract_button_service_element_id   = "#order_item_add_subtract_button_service_id_<%= @order_item.service_id %>"
 $(".cart-text").html("<%= escape_javascript(render 'layouts/cart_text') %>")
-$(".shopping-cart").html("<%= escape_javascript(render 'carts/shopping_cart') %>")
+$(order_item_add_subtract_button_service_element_id).html(" <%= escape_javascript(render 'services/add_to_agreement_submit_button') %> ")
+<% end %>
+
