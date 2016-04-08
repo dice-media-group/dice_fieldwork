@@ -2,7 +2,7 @@ class Order < ActiveRecord::Base
   # has_many :line_items
   
   belongs_to :order_status
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   belongs_to :service_agreement
   belongs_to :account
   
