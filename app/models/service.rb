@@ -3,7 +3,6 @@ class Service < ActiveRecord::Base
   validates :name, uniqueness: true
   validates :price, numericality: {greater_than_or_equal_to: 0.01}
   belongs_to :account
-  belongs_to :service_agreement
   
   scope :status, -> (status) { where status: status }
   scope :currently_offered_as_part_of_service_agreement, -> (initial_date) { 
