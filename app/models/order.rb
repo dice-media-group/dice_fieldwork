@@ -3,6 +3,9 @@ class Order < ActiveRecord::Base
   
   belongs_to :order_status
   has_many :order_items
+  belongs_to :service_agreement
+  belongs_to :account
+  
   before_create :set_order_status
   before_save :update_subtotal
 

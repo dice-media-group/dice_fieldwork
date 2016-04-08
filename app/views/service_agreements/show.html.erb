@@ -37,7 +37,14 @@
           <canvas class="pad" width="198" height="55"></canvas>
         </div>
       </div>
-
+      <div class="row">
+          <h2>Additional Services</h2>
+          <ul>
+              <%= @order_items.each do |item| %>
+                 <li><%= "#{item.service.name}" %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= "$#{item.total_price}" %></li>
+              <% end %>
+          </ul>
+      </div>
           
       </div>
 

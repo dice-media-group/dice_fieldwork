@@ -1,4 +1,24 @@
+<div class="row">
 Service Agreement (part 2)
+</div>
+<div class="row">
+    <div class="col-md-4" id="agreement_attachment_button_column">
+
+ <%= render :partial => 'agreement_attachment_button', locals: {agreement: @agreement} %>
+ 
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-4">
+        <%= link_to "Skip to Service Agreement printout", service_agreement_path(@agreement) %>
+    </div>
+    <div class="col-md-2">
+        <div class="demo">
+            
+        </div>
+    </div>
+        
+</div>
         <h1 class="cart-text"><%= render 'layouts/cart_text' %></h1>
 <h3 class="text-center">Additional Services</h3>
 
@@ -11,6 +31,4 @@ Service Agreement (part 2)
       </ul>
   </div>
 </div>
-
-    <%# render :partial => 'form_for_terms_of_service' %>
 

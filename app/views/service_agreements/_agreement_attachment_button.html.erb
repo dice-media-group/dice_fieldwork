@@ -1,0 +1,5 @@
+<%= form_for(current_order) do |f| %>
+<%# f.hidden_field :service_agreement_id, :value =>  agreement.id %>
+
+  <%= f.submit "Attach to Agreement", :class => 'btn btn-lg btn-primary btn-block' %>
+<% end -%>

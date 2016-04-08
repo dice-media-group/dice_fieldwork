@@ -1,5 +1,10 @@
 <% if @order.errors.any? || @order_item.errors.any? %>
 alert("not valid.")
 <% else %>
-  $(".cart-text").html("<%= escape_javascript(render 'layouts/cart_text') %>")
+      service_element_id            = "#service_<%= @order_item.service_id %>"
+      agreement_attachment_button_id   = "#agreement_attachment_button_column"
+    order_item_add_subtract_button_service_element_id   = "#order_item_add_subtract_button_service_id_<%= @order_item.service_id %>"
+      $(".cart-text").html("<%= escape_javascript(render 'layouts/cart_text') %>")
+      $(order_item_add_subtract_button_service_element_id).html("<%= escape_javascript(render 'services/clickable_destroy_form', locals: {service: @order_item.service }) %>")
+    $('#agreement_attachment_button_column').text('')
 <% end %>

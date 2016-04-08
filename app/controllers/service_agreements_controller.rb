@@ -20,20 +20,23 @@ class ServiceAgreementsController < ApplicationController
   end
 
   def edit
-    @agreement    = ServiceAgreement.find(params[:id])
-    initial_date  = Date.today
-    @services     = Service.currently_offered_as_part_of_service_agreement(Date.today)
-    @order_item   = current_order.order_items.new
-
+    @agreement            = ServiceAgreement.find(params[:id])
+    gon.current_agreement = @agreement
+    initial_date          = Date.today
+    @services             = Service.currently_offered_as_part_of_service_agreement(Date.today)
+    @order_item           = current_order.order_items.new
+    @order                = current_order
+    
   end
 
   def show
-    @agreement  = ServiceAgreement.find(params[:id])
-    @account    = @agreement.account
+    @agreement        = ServiceAgreement.find(params[:id])
+    @account          = @agreement.account
+    @order            = current_order
     @billing_address  = @account.addresses.all.find_billing_location(@account.addresses)
     @service_address  = @account.addresses.all.find_service_location(@account.addresses)
     @payment_method   = PaymentMethod.find_payment_method(@account.payment_methods)
-    @order_items = current_order.order_items
+    @order_items      = current_order.order_items
     
   end
 
@@ -43,6 +46,7 @@ class ServiceAgreementsController < ApplicationController
 
     respond_to do |format|
       if @agreement.save
+        session[:order_id] = nil
         format.html { redirect_to edit_service_agreement_path(@agreement),
           notice: 'Service agreement details were successfully created.' }
         format.json { render action: 'show', status: :created,
@@ -57,6 +61,10 @@ class ServiceAgreementsController < ApplicationController
 
   def update
   end
+
+  def current_order_item(service)
+    current_order.order_items.where(service: service)
+  end
   
   private
     # Never trust parameters from the scary internet, only allow the white
@@ -68,7 +76,7 @@ class ServiceAgreementsController < ApplicationController
         :satisfaction_guarantee_initials,
         :account_id,
         :credit_card_signature,
-        :scorpion,
+        :order_id,
         :notes => [:content]
       )
     end

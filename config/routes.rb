@@ -1,19 +1,18 @@
 Rails.application.routes.draw do
 
-  get 'order_items_controller/new'
-
   devise_for :users
   resources :services, :orders, :line_items, :consultations
 
   resources :accounts do
     resources :notes, only: [:index, :new]
     resources :service_agreements, shallow: true do
-      resources :order_items, only: [:create, :update, :destroy]
+      resources :order_items, only: [:create]
     end
     # resources :consultations, only: [:index, :new]
   end
 
   resource :cart, only: [:show]
+  resources :order_items, only: [:index, :update, :destroy]
 
   mount RailsAdmin::Engine => '/backstage', as: 'rails_admin'
   # The priority is based upon order of creation: first created -> highest priority.
