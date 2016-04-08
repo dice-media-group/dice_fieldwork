@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408051914) do
+ActiveRecord::Schema.define(version: 20160408123124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -211,14 +211,12 @@ ActiveRecord::Schema.define(version: 20160408051914) do
     t.decimal  "price",                                precision: 12, scale: 3, null: false
     t.datetime "created_at",                                                    null: false
     t.datetime "updated_at",                                                    null: false
-    t.integer  "service_agreement_id"
     t.date     "part_of_service_agreement_start_date"
     t.date     "part_of_service_agreement_end_date"
     t.boolean  "active"
   end
 
   add_index "services", ["name"], name: "index_services_on_name", unique: true, using: :btree
-  add_index "services", ["service_agreement_id"], name: "index_services_on_service_agreement_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -251,5 +249,4 @@ ActiveRecord::Schema.define(version: 20160408051914) do
   add_foreign_key "payment_methods", "accounts"
   add_foreign_key "service_agreements", "accounts"
   add_foreign_key "service_agreements", "orders"
-  add_foreign_key "services", "service_agreements"
 end
