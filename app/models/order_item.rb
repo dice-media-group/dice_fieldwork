@@ -3,7 +3,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order
   
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  validate :service_present
+  # validate :service_present
   validate :order_present
 
   before_save :finalize

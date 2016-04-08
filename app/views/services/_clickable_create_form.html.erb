@@ -1,4 +1,4 @@
-    <%= form_for [agreement, order_item], remote: true, :authenticity_token => true  do |f| %>
+    <%= form_for order_item, remote: true, :authenticity_token => true  do |f| %>
             <%= f.hidden_field :quantity, value: 1, class: "form-control", min: 1 %>
             <div class="input-group-btn">
               <%= f.hidden_field :service_id, value: service.id %>
