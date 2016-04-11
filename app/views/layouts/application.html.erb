@@ -12,22 +12,11 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
+<style type="text/css" media="screen">
+    body { padding-top: 70px; }
+</style>
 </head>
-<body>
-    <div id="container">
-        <div id="user_nav">
-            <% if user_signed_in? %>
-                Logged in as <strong><%= current_user.email %></strong>.
-                <%= link_to "Edit Profile", edit_user_registration_path %> | 
-                <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-            <% else %>
-               <%= link_to "Sign up", new_user_registration_path %> | 
-               <%= link_to "Log in", new_user_session_path %>
-            <% end %>
-        </div>
-    </div>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+<body style="padding-top: 70px;">
 <!-- -->
 
 
@@ -56,13 +45,24 @@
           </div>
         </nav>
         <div class="container">
+            <div id="user_nav">
+                <% if user_signed_in? %>
+                    Logged in as <strong><%= current_user.email %></strong>.
+                    <%= link_to "Edit Profile", edit_user_registration_path %> | 
+                    <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+                <% else %>
+                   <%= link_to "Sign up", new_user_registration_path %> | 
+                   <%= link_to "Log in", new_user_session_path %>
+                <% end %>
+            </div>
+            
             <%= yield %>
-        </div>
           <hr>
 
           <footer>
             <p>© 2015 Company, Inc.</p>
           </footer>
+        </div>
         </div> <!-- /container -->
 
 
