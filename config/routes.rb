@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :hq, only: [:index]
+  
+
   devise_for :users
   resources :services, :orders, :line_items, :consultations
 
