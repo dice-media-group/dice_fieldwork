@@ -1,4 +1,5 @@
 class ServiceAgreementsController < ApplicationController
+  authorize_resource
 
   # GET /services
   # GET /services.json
@@ -17,6 +18,8 @@ class ServiceAgreementsController < ApplicationController
     @account = Account.find(params[:account_id])
     @service_agreement = @account.service_agreements.build
     @service_address  = Address.find_service_location(@account.addresses)
+    @services             = Service.currently_offered_as_part_of_service_agreement(Date.today)
+    
   end
 
   def edit
@@ -32,11 +35,11 @@ class ServiceAgreementsController < ApplicationController
   def show
     @agreement        = ServiceAgreement.find(params[:id])
     @account          = @agreement.account
-    @order            = current_order
+    @order            = @agreement.orders.last
     @billing_address  = @account.addresses.all.find_billing_location(@account.addresses)
     @service_address  = @account.addresses.all.find_service_location(@account.addresses)
     @payment_method   = PaymentMethod.find_payment_method(@account.payment_methods)
-    @order_items      = current_order.order_items
+    @order_items      = @order.order_items
     
   end
 
@@ -46,7 +49,7 @@ class ServiceAgreementsController < ApplicationController
 
     respond_to do |format|
       if @agreement.save
-        session.delete(:order_id)
+        session.delete(:order_id) if session[:order_id]
         format.html { redirect_to edit_service_agreement_path(@agreement),
           notice: 'Service agreement details were successfully created.' }
         format.json { render action: 'show', status: :created,
@@ -60,6 +63,16 @@ class ServiceAgreementsController < ApplicationController
   end
 
   def update
+    # creates or updates the relationships of the order that belongs to the service agreement
+    @agreement = ServiceAgreement.find(params[:id])
+    order = current_order
+    order.service_agreement = @agreement
+    order.account = @agreement.account
+    order.save!
+    session.delete[:order_id] if session[:order_id]
+    format.html { redirect_to edit_service_agreement_path(@agreement),
+      notice: 'Order attached to service agreement and account.' }
+    
   end
 
   def current_order_item(service)
@@ -70,15 +83,7 @@ class ServiceAgreementsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white
     # list through.
     def agreement_params
-      params.require(:service_agreement).permit(:field_tech_signature,
-        :customer_signature,
-        :customers_initials_for_charges,
-        :satisfaction_guarantee_initials,
-        :account_id,
-        :credit_card_signature,
-        :order_id,
-        :notes => [:content]
-      )
+      params.require(:service_agreement).permit(:field_tech_signature, :customer_signature, :customers_initials_for_charges, :satisfaction_guarantee_initials, :account_id, :credit_card_signature, :order_id, :notes => [:content])
     end
   
 end

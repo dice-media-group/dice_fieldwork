@@ -38,13 +38,15 @@
         </div>
       </div>
       <div class="row">
-          <h2>Additional Services</h2>
+          <h2> Additional Services</h2>
           <% @order.order_items.each do |item| %>
-          <div class="col-md-6">
-              <%= "#{item.service.name}" %>
-          </div>
-          <div class="col-md-6">
-              <%= "$#{item.total_price}" %>
+          <div class="row">
+              <div class="col-md-6">
+                  <%= "#{item.service.name}" %>
+              </div>
+              <div class="col-md-6">
+                  <%= "$#{item.total_price}" %>
+              </div>
           </div>
           <% end %>
           <div class="row">
