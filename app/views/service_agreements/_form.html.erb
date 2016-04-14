@@ -11,15 +11,35 @@
       </ul>
     </div>
   <% end %>
+  
+    <%= f.fields_for :orders do |order| %>
+        <div class="form-group">
+            <%= order.hidden_field :pay_type, value: "electronic"  %>
+        </div>
+    <% end %>
 
           <div class="row">
             <div class="col-md-4">
+                <p class="cart-text"></p>
               <h2>Customer Information</h2>
-              <% if @service_address && @account %>
-              <%= render :partial => 'customer_info', locals: {service_address: @service_address, account: @account }  %>
+              <div id="service_address_info">
+              <% if @service_address.street_one.to_s.length > 0 %>
+                <%= render :partial => 'customer_info', 
+                      locals: {service_address: @service_address, account: @account }  %>
+              <% else %>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-address-modal">
+                    Create Service Address
+                  </button>
+                  
               <% end %>
+                  
+              </div>
               <h2>Payment Information</h2>
-              <%# render :partial => 'payment_info' %>
+              <% if @payment_method.card_number.to_s.length > 2  && @billing_address.street_one.to_s.length > 2 %>
+                  <%= render :partial => 'payment_info', 
+                      locals: {payment_method: @payment_method, billing_address: @billing_address} %>
+              <% end %>
               <div class="sigPad">
                   <p class="typeItDesc">Review your signature</p>
                   <p class="drawItDesc">Draw your signature</p>
@@ -133,5 +153,4 @@
   </div>
 <% end %>
 
-<%= render :partial => 'signaturepad_scripts' %>
     

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408123738) do
+ActiveRecord::Schema.define(version: 20160414022631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,11 +155,13 @@ ActiveRecord::Schema.define(version: 20160408123738) do
     t.integer  "order_status_id"
     t.integer  "service_agreement_id"
     t.integer  "account_id"
+    t.integer  "user_id"
   end
 
   add_index "orders", ["account_id"], name: "index_orders_on_account_id", using: :btree
   add_index "orders", ["order_status_id"], name: "index_orders_on_order_status_id", using: :btree
   add_index "orders", ["service_agreement_id"], name: "index_orders_on_service_agreement_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "payment_methods", force: :cascade do |t|
     t.string   "card_number"
@@ -197,17 +199,19 @@ ActiveRecord::Schema.define(version: 20160408123738) do
     t.boolean  "cockroach"
     t.boolean  "bed_bugs"
     t.integer  "order_id"
+    t.integer  "user_id"
   end
 
   add_index "service_agreements", ["account_id"], name: "index_service_agreements_on_account_id", using: :btree
   add_index "service_agreements", ["order_id"], name: "index_service_agreements_on_order_id", using: :btree
+  add_index "service_agreements", ["user_id"], name: "index_service_agreements_on_user_id", using: :btree
 
   create_table "services", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.decimal  "price",                                precision: 12, scale: 3, null: false
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
+    t.decimal  "price",                                precision: 12, scale: 3, default: 0.0, null: false
+    t.datetime "created_at",                                                                  null: false
+    t.datetime "updated_at",                                                                  null: false
     t.date     "part_of_service_agreement_start_date"
     t.date     "part_of_service_agreement_end_date"
     t.boolean  "active"
@@ -242,7 +246,9 @@ ActiveRecord::Schema.define(version: 20160408123738) do
   add_foreign_key "orders", "accounts"
   add_foreign_key "orders", "order_statuses"
   add_foreign_key "orders", "service_agreements"
+  add_foreign_key "orders", "users"
   add_foreign_key "payment_methods", "accounts"
   add_foreign_key "service_agreements", "accounts"
   add_foreign_key "service_agreements", "orders"
+  add_foreign_key "service_agreements", "users"
 end

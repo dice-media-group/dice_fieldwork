@@ -1,10 +1,10 @@
-<h1>Listing orders</h1>
+<h1></h1>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Address</th>
+      <th>Created at</th>
       <th>Email</th>
       <th>Pay type</th>
       <th></th>
@@ -16,14 +16,8 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.name %></td>
-        <td><%= order.address %></td>
-        <td><%= order.email %></td>
-        <td><%= order.pay_type %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
+        <td><%= order.service_agreement.account.name %></td>
+        <td><%= order.service_agreement.created_at %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,5 +27,5 @@
 
 <%= link_to 'New Order', new_order_path %>
 <!-- START_HIGHLIGHT -->
-<p><%= paginate @orders %></p>
+<p><%# paginate @orders %></p>
 <!-- END_HIGHLIGHT -->
