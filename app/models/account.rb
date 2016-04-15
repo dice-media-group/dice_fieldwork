@@ -9,6 +9,7 @@ class Account < ActiveRecord::Base
   has_many :users, :through => :consultations
   has_many :service_agreements, dependent: :destroy
   has_many :payment_methods, dependent: :destroy
+  has_many :pesticide_application_records
   def name
     "#{last_name}, #{first_name}"
   end

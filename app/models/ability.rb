@@ -15,7 +15,7 @@ class Ability
       can :access, :rails_admin # needed to access RailsAdmin
       can :dashboard              # grant access to the dashboard
       can :read, [Calendar, User]
-      can :manage, [Account, Address, Note, Service, Consultation, ServiceAgreement, Order]
+      can :manage, [Account, Address, Note, Service, Consultation, ServiceAgreement, Order, PesticideApplicationRecord]
       # can :read, :all
       
       # can :create, Account
