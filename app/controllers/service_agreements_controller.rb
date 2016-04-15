@@ -36,7 +36,7 @@ class ServiceAgreementsController < ApplicationController
     gon.current_agreement = @agreement
     initial_date          = Date.today
     @services             = Service.currently_offered_as_part_of_service_agreement(Date.today)
-    @order                = current_order
+    @order                = @agreement.order
     @order_item           = @order.order_items.new
     
   end

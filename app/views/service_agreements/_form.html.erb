@@ -78,7 +78,8 @@
                   </tr>
               </table>
               </div>
-              <div id="satisfaction_guarantee" class="row">
+              <div class="row">
+                  <div id="satisfaction_guarantee" class="row">
                 <%= render :partial => 'satisfaction_guarantee' %>
                 <div class="sigPad">
                   <p class="drawItDesc">Draw your initials</p>
@@ -95,6 +96,21 @@
                 <hr />
                 
               </div>
+              </div>
+              <div class="row">
+                  <h2> Additional Services</h2>
+                  <% if @order %>
+                      <% if @order.order_items %>
+                          <% if @order.order_items.count > 0 %>
+                          <%= render :partial => 'additional_services_tally', order: @order %>
+                          <% else %>
+                              <p>no additional service</p>
+                            <%= link_to "Add more service", order_path(@order) %>
+                          <% end %>
+                     <% end %>
+                  <% end %>
+              </div>
+              
             </div>
 
           </div>
