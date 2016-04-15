@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415102615) do
+ActiveRecord::Schema.define(version: 20160415105307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,6 +175,30 @@ ActiveRecord::Schema.define(version: 20160415102615) do
 
   add_index "payment_methods", ["account_id"], name: "index_payment_methods_on_account_id", using: :btree
 
+  create_table "pesticide_app_logs", force: :cascade do |t|
+    t.string   "applicator_name"
+    t.datetime "start_time"
+    t.datetime "stop_time"
+    t.string   "temperature"
+    t.string   "wind_speed_direction"
+    t.string   "pesticide_manufacturer"
+    t.string   "trade_name"
+    t.string   "epa_reg_formulation"
+    t.string   "rate_product_dilutent_per_acre"
+    t.string   "crop_or_site_and_crop_stage"
+    t.string   "pests"
+    t.string   "equipment_used"
+    t.string   "acres_or_area_treated"
+    t.string   "location_one"
+    t.string   "location_two"
+    t.text     "comments_map"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "account_id"
+  end
+
+  add_index "pesticide_app_logs", ["account_id"], name: "index_pesticide_app_logs_on_account_id", using: :btree
+
   create_table "pesticide_application_records", force: :cascade do |t|
     t.string   "applicator_name"
     t.datetime "start_time"
@@ -272,6 +296,7 @@ ActiveRecord::Schema.define(version: 20160415102615) do
   add_foreign_key "orders", "service_agreements"
   add_foreign_key "orders", "users"
   add_foreign_key "payment_methods", "accounts"
+  add_foreign_key "pesticide_app_logs", "accounts"
   add_foreign_key "pesticide_application_records", "accounts"
   add_foreign_key "service_agreements", "accounts"
   add_foreign_key "service_agreements", "orders"
