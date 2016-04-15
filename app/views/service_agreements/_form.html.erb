@@ -100,14 +100,14 @@
               <div class="row">
                   <h2> Additional Services</h2>
                   <% if @order %>
-                      <% if @order.order_items %>
                           <% if @order.order_items.count > 0 %>
                           <%= render :partial => 'additional_services_tally', order: @order %>
                           <% else %>
                               <p>no additional service</p>
                             <%= link_to "Add more service", order_path(@order) %>
                           <% end %>
-                     <% end %>
+                  <% else %>
+                      <!--do nothing -->
                   <% end %>
               </div>
               

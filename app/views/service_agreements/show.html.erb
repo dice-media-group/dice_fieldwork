@@ -2,7 +2,7 @@
 
 <div class="row">
     <%= link_to "Accounts", accounts_path %>
-    <%= link_to "Add Additional Service", order_path(@order) %>
+    <%= link_to "Add Additional Service", order_path(@order) if @order %>
 </div>
 
   <div class="row">
