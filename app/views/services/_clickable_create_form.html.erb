@@ -1,4 +1,3 @@
-    <p>order id <%= @order.id %></p>
     <%= form_for order_item, remote: true, :authenticity_token => true  do |f| %>
             <%= f.hidden_field :quantity, value: 1, class: "form-control", min: 1 %>
             <div class="input-group-btn">
