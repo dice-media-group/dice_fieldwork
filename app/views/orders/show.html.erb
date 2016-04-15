@@ -1,24 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @order.service_agreement.account.name %>
-</p>
+<div class="row">
+<%= link_to "Current Service Agreement", service_agreement_path(@agreement) %> (part 2)
+</div>
+<div class="row">
+    <div class="col-md-4" id="agreement_attachment_button_column">
 
-<p>
-  <strong>Address:</strong>
-  <%# @order.address %>
-</p>
+ <%# render :partial => 'agreement_attachment_button', locals: {agreement: @agreement} %>
+ 
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-2">
+        <div class="demo">
+            
+        </div>
+    </div>
+        
+</div>
+        <%=  "#{@order.order_items.count} Items in order ##{@order.id} ( #{number_to_currency @order.subtotal} )"%>
+        
+<h3 class="text-center">Additional Services</h3>
 
-<p>
-  <strong>Email:</strong>
-  <%#= @order.email %>
-</p>
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3" id="service_list">
+      <ul>
+    <% @services.each do |service| %>
+        <%= render :partial => 'service_agreements/clickable_services_row', locals: {service: service, agreement: @agreement, order_item: @order_item, order: @order } %>
+    <% end %>          
+      </ul>
+  </div>
+</div>
 
-<p>
-  <strong>Pay type:</strong>
-  <%#= @order.pay_type %>
-</p>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%# link_to 'Edit', edit_order_path(@order) %> |
+<%# link_to 'Back', orders_path %>

@@ -18,6 +18,7 @@
       <tr>
         <td><%= order.service_agreement.account.name %></td>
         <td><%= order.service_agreement.created_at %></td>
+        <td><%= link_to "edit", order_path(order) %></td>
       </tr>
     <% end %>
   </tbody>

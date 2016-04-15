@@ -44,7 +44,7 @@ class ServiceAgreementsController < ApplicationController
   def show
     @agreement        = ServiceAgreement.find(params[:id])
     @account          = @agreement.account
-    @order            = @agreement.orders.last
+    @order            = @agreement.orders.first
     @billing_address  = @account.addresses.all.find_billing_location(@account.addresses)
     @service_address  = @account.addresses.all.find_service_location(@account.addresses)
     @payment_method   = PaymentMethod.find_payment_method(@account.payment_methods)
