@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :consultations
   has_many :accounts, :through => :consultations
+  has_many :service_agreements
   # def email
   #   name = Guest.email
   # end

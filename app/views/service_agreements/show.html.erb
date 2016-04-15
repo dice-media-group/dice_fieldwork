@@ -1,5 +1,10 @@
 <h1>Service Agreement</h1>
 
+<div class="row">
+    <%= link_to "Accounts", accounts_path %>
+    <%= link_to "Add Additional Service", order_path(@order) %>
+</div>
+
   <div class="row">
     <div class="col-md-4">
       <h2>Customer Information</h2>
@@ -39,28 +44,12 @@
       </div>
       <div class="row">
           <h2> Additional Services</h2>
-          <% @order.order_items.each do |item| %>
-          <div class="row">
-              <div class="col-md-6">
-                  <%= "#{item.service.name}" %>
-              </div>
-              <div class="col-md-6">
-                  <%= "$#{item.total_price}" %>
-              </div>
-          </div>
+          <% if @order.order_items.count > 0 %>
+          <%= render :partial => 'additional_services_tally', order: @order %>
+          <% else %>
+              <p>no additional service</p>
+            <%= link_to "Add more service", order_path(@order) %>
           <% end %>
-          <div class="row">
-              <p>=================</p>
-          </div>
-          <div class="row">
-          <div class="col-md-6">
-              <p>SUBTOTAL</p>
-          </div>
-          <div class="col-md-6">
-              <%= "$#{@order.subtotal}" %>
-          </div>
-              
-          </div>
       </div>
           
       </div>

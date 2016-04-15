@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
   has_many :order_items, dependent: :destroy
   belongs_to :service_agreement
   belongs_to :account
+  belongs_to :user
   
   before_create :set_order_status
   before_save :update_subtotal

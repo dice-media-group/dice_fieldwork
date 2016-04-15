@@ -13,13 +13,13 @@ class ApplicationController < ActionController::Base
     hq_index_path 
   end
   
-  def current_order
-    if !session[:order_id].nil?
-      Order.find(session[:order_id])
-    else
-      Order.new
-    end
-  end
+  # def current_order
+  #   if !params[:id].nil?
+  #     Order.find(params[:id])
+  #   else
+  #     Order.new
+  #   end
+  # end
   
   
 end

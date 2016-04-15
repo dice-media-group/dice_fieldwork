@@ -1,10 +1,3 @@
-<%# if current_order %>
-    <%# current_order_item = Array(current_order.order_items.where(service: service).first) %>
-<%# render :partial => 'services/clickable_destroy_form', locals: {service: service, agreement: agreement, order_item: order_item } %>
-            <%- current_order.order_items.each do |oi| %>
-                <%# link_to "Delete", 
-                    oi, { data: { confirm: "Are you sure you wish to delete the service '#{oi.service.name}' from your cart?" }, method: :delete, remote: true, class: "btn btn-danger" } %>
-                    <%= link_to "Delete", oi, { data: { confirm: "Are you sure you wish to delete the service '#{oi.service.name}' from your cart?" }, method: :delete, remote: true, class: "btn btn-danger" } %>
+                    <%#= link_to "Delete", order_item, data: { confirm: "Are you sure you wish to delete the service '#{order_item.service.name}' from your cart?", method: :delete, remote: true, class: {"btn btn-danger"} %>
+                    <%= link_to "Remove from Order",  order_item,  method: :delete, data: { confirm:  "Are you sure you wish to delete this service from your cart?" }, remote: true, class: "btn btn-danger" %>
                     
-            <%- end %>
-

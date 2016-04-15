@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'addresses/create'
+
+  get 'addresses/update'
+
   resources :hq, only: [:index]
   
 
@@ -8,7 +12,11 @@ Rails.application.routes.draw do
 
   resources :accounts do
     resources :notes, only: [:index, :new]
+    resources :addresses, only: [:create]
+    resources :orders, only: [:create]
+    resources :payment_methods, only: [:create, :update]
     resources :service_agreements, shallow: true do
+      resources :orders, shallow: true 
     end
     # resources :consultations, only: [:index, :new]
   end

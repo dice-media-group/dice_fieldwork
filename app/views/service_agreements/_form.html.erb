@@ -11,15 +11,35 @@
       </ul>
     </div>
   <% end %>
+  
+    <%= f.fields_for :orders do |order| %>
+        <div class="form-group">
+            <%= order.hidden_field :pay_type, value: "electronic"  %>
+        </div>
+    <% end %>
 
           <div class="row">
             <div class="col-md-4">
+                <p class="cart-text"></p>
               <h2>Customer Information</h2>
-              <% if @service_address && @account %>
-              <%= render :partial => 'customer_info', locals: {service_address: @service_address, account: @account }  %>
+              <div id="service_address_info">
+              <% if @service_address.street_one.to_s.length > 0 %>
+                <%= render :partial => 'customer_info', 
+                      locals: {service_address: @service_address, account: @account }  %>
+              <% else %>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-address-modal">
+                    Create Service Address
+                  </button>
+                  
               <% end %>
+                  
+              </div>
               <h2>Payment Information</h2>
-              <%# render :partial => 'payment_info' %>
+              <% if @payment_method.card_number.to_s.length > 2  && @billing_address.street_one.to_s.length > 2 %>
+                  <%= render :partial => 'payment_info', 
+                      locals: {payment_method: @payment_method, billing_address: @billing_address} %>
+              <% end %>
               <div class="sigPad">
                   <p class="typeItDesc">Review your signature</p>
                   <p class="drawItDesc">Draw your signature</p>
@@ -58,7 +78,8 @@
                   </tr>
               </table>
               </div>
-              <div id="satisfaction_guarantee" class="row">
+              <div class="row">
+                  <div id="satisfaction_guarantee" class="row">
                 <%= render :partial => 'satisfaction_guarantee' %>
                 <div class="sigPad">
                   <p class="drawItDesc">Draw your initials</p>
@@ -75,6 +96,21 @@
                 <hr />
                 
               </div>
+              </div>
+              <div class="row">
+                  <h2> Additional Services</h2>
+                  <% if @order %>
+                      <% if @order.order_items %>
+                          <% if @order.order_items.count > 0 %>
+                          <%= render :partial => 'additional_services_tally', order: @order %>
+                          <% else %>
+                              <p>no additional service</p>
+                            <%= link_to "Add more service", order_path(@order) %>
+                          <% end %>
+                     <% end %>
+                  <% end %>
+              </div>
+              
             </div>
 
           </div>
@@ -133,5 +169,4 @@
   </div>
 <% end %>
 
-<%= render :partial => 'signaturepad_scripts' %>
     

@@ -1,2 +1,103 @@
+              <% if @service_address.street_one.to_s.length < 3 %>
+                    <%= form_for [@account, @address]  do |addresses_form| %>
+                        <ul>
+                            <li>
+
+                                <%= addresses_form.label :street_one %><br >
+                                <%= addresses_form.text_field :street_one %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :street_two %><br >
+                                <%= addresses_form.text_field :street_two %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :city %><br >
+                                <%= addresses_form.text_field :city %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :state %><br >
+                                <%= addresses_form.text_field :state %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :postal_code %><br >
+                                <%= addresses_form.text_field :postal_code %>
+                
+                            </li>
+                                <%= addresses_form.hidden_field :is_billing, value: false %>
+                        </ul>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <%= addresses_form.submit 'Add Service Location',  class: "btn btn-primary" %>
+                          </div>
+                    <% end %>
+                  
+              <% end %>
+
+              <% if @billing_address.street_one.to_s.length < 3 %>
+                    <%= form_for [@account, @address] do |addresses_form| %>
+                        <ul>
+                            <li>
+
+                                <%= addresses_form.label :street_one %><br >
+                                <%= addresses_form.text_field :street_one %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :street_two %><br >
+                                <%= addresses_form.text_field :street_two %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :city %><br >
+                                <%= addresses_form.text_field :city %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :state %><br >
+                                <%= addresses_form.text_field :state %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :postal_code %><br >
+                                <%= addresses_form.text_field :postal_code %>
+                
+                            </li>
+                                <%= addresses_form.hidden_field :is_billing, value: true %>
+                        </ul>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <%= addresses_form.submit 'Add Billing Address',  class: "btn btn-primary" %>
+                          </div>
+                    <% end %>
+                  
+              <% end %>
+              
+
+              <% if @payment_method.card_number.to_s.length < 3 %>
+                    <%= form_for [@account, @new_payment_method] do |f| %>
+                        <ul>
+                            <li>
+
+                                <%= f.label :card_number %><br >
+                                <%= f.text_field :card_number %>
+                            </li>
+                            <li>
+                                <%= f.label :expiration %><br >
+                                <%= f.text_field :expiration %>
+                            </li>
+                            <li>
+                                <%= f.label :cvc %><br >
+                                <%= f.text_field :cvc %>
+                            </li>
+                        </ul>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <%= f.submit 'Add Payment Method',  class: "btn btn-primary" %>
+                          </div>
+
+                    <% end %>
+                  
+              <% end %>
+
     <%= render :partial => "form" %>
   
+<%= render :partial => 'add_service_address_modal', locals: {addressable: @account} %>

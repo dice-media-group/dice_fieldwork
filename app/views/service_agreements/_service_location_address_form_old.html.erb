@@ -1,0 +1,25 @@
+Addresses:
+<ul>
+    <%= f.fields_for :addresses do |addresses_form| %>
+    <li>
+        <%= addresses_form.label :street_one %><br >
+        <%= addresses_form.text_field :street_one %>
+    </li>
+    <li>
+        <%= addresses_form.label :street_two %><br >
+        <%= addresses_form.text_field :street_two %>
+    </li>
+    <li>
+        <%= addresses_form.label :city %><br >
+        <%= addresses_form.text_field :city %>
+    </li>
+    <li>
+        <%= addresses_form.label :state %><br >
+        <%= addresses_form.text_field :state %>
+    </li>
+    <li>
+        <%= addresses_form.label :postal_code %><br >
+        <%= addresses_form.text_field :postal_code %>
+        
+    </li>
+        <%= addresses_form.hidden_field :is_business, value: false %>

@@ -2,8 +2,11 @@
             <%= f.hidden_field :quantity, value: 1, class: "form-control", min: 1 %>
             <div class="input-group-btn">
               <%= f.hidden_field :service_id, value: service.id %>
+              <%= f.hidden_field :order_id, value: @order.id %>
+              <%# hidden_field_tag :order, id: @order.id %>
               <div id="order_item_add_subtract_button_service_id_<%= service.id %>">
-                  <%= render :partial => 'services/add_to_agreement_submit_button' %>
+                  <%# render :partial => 'services/add_to_agreement_submit_button' %>
+                  <%= submit_tag "Add to Order", class: "btn btn-primary" %>
               </div>
             </div>
     <% end %>

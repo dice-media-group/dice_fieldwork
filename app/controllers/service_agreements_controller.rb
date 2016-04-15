@@ -16,9 +16,18 @@ class ServiceAgreementsController < ApplicationController
     # render layout: false
     
     @account = Account.find(params[:account_id])
-    @service_agreement = @account.service_agreements.build
-    @service_address  = Address.find_service_location(@account.addresses)
+    @service_agreement = @account.service_agreements.new
+    @service_agreement.orders.new
+    
+    @service_address  = @account.addresses.all.find_service_location(@account.addresses)
+    @billing_address  = @account.addresses.all.find_billing_location(@account.addresses)
     @services             = Service.currently_offered_as_part_of_service_agreement(Date.today)
+    @payment_method   = PaymentMethod.find_payment_method(@account.payment_methods)
+    
+    @new_account_address  = @account.addresses.new
+    @new_payment_method   = @account.payment_methods.build
+    @address = Address.new(:addressable => @account)
+    
     
   end
 
@@ -27,39 +36,37 @@ class ServiceAgreementsController < ApplicationController
     gon.current_agreement = @agreement
     initial_date          = Date.today
     @services             = Service.currently_offered_as_part_of_service_agreement(Date.today)
-    @order_item           = current_order.order_items.new
-    @order                = current_order
+    @order                = @agreement.order
+    @order_item           = @order.order_items.new
     
   end
 
   def show
     @agreement        = ServiceAgreement.find(params[:id])
     @account          = @agreement.account
-    @order            = @agreement.orders.last
+    @order            = @agreement.orders.first
     @billing_address  = @account.addresses.all.find_billing_location(@account.addresses)
     @service_address  = @account.addresses.all.find_service_location(@account.addresses)
     @payment_method   = PaymentMethod.find_payment_method(@account.payment_methods)
-    @order_items      = @order.order_items
+    # @order_items      = @order.order_items
     
   end
 
   def create
     @account    = Account.find(params[:account_id])
-    @agreement = @account.service_agreements.new(agreement_params)
-
-    respond_to do |format|
+    @agreement  = current_user.service_agreements.new agreement_params
+    @agreement.account_id = @account.id
+    
       if @agreement.save
-        session.delete(:order_id) if session[:order_id]
-        format.html { redirect_to edit_service_agreement_path(@agreement),
-          notice: 'Service agreement details were successfully created.' }
-        format.json { render action: 'show', status: :created,
-          location: @agreement }
+        @order = @agreement.orders.create!
+        @order.user_id = current_user.id
+        @order.save!
+        
+        redirect_to @order,
+          notice: 'Service agreement details were successfully created.'
       else
-        format.html { render action: 'new' }
-        format.json { render json: @agreement.errors,
-          status: :unprocessable_entity }
+        render action: 'new'
       end
-    end
   end
 
   def update
@@ -83,7 +90,7 @@ class ServiceAgreementsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white
     # list through.
     def agreement_params
-      params.require(:service_agreement).permit(:field_tech_signature, :customer_signature, :customers_initials_for_charges, :satisfaction_guarantee_initials, :account_id, :credit_card_signature, :order_id, :notes => [:content])
+      params.require(:service_agreement).permit(:field_tech_signature, :customer_signature, :customers_initials_for_charges, :satisfaction_guarantee_initials, :account_id, :credit_card_signature, :notes => [:content], order_attributes: [:pay_type])
     end
   
 end
