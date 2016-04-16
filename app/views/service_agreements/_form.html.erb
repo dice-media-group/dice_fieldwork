@@ -20,19 +20,19 @@
 
           <div class="row">
             <div class="col-md-4">
-                <p class="cart-text"></p>
+              <p class="cart-text"></p>
               <h2>Customer Information</h2>
               <div id="service_address_info">
-              <% if @service_address.street_one.to_s.length > 0 %>
-                <%= render :partial => 'customer_info', 
-                      locals: {service_address: @service_address, account: @account }  %>
-              <% else %>
-                  <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-address-modal">
-                    Create Service Address
-                  </button>
+                  <% if @service_address.street_one.to_s.length > 0 %>
+                    <%= render :partial => 'customer_info', 
+                          locals: {service_address: @service_address, account: @account }  %>
+                  <% else %>
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-address-modal">
+                        Create Service Address
+                      </button>
                   
-              <% end %>
+                  <% end %>
                   
               </div>
               <h2>Payment Information</h2>
@@ -56,70 +56,53 @@
               <hr />
               <%= render :partial => 'big_tom_contact_info' %>
             </div>
-            <div class="col-md-4">
-                <%= render :partial => 'list_of_pests' %>
-                <!--notes -->
-                <!-- <h2>Notes</h2> -->
-                <%# f.fields_for :notes do |notes_fields| %>
-                    <%# notes_fields.text_area :content, size: "24x6" %>
-                <%# end %>
-                
-            </div>
-            <div class="col-md-4">
-              <h2>Big Toms Pest Control</h2>
-              <h3>#1 in Pest Control Service</h3>
-              <div id="fieldtech_name" class ="row">
-              <table class="table table-bordered">
-                  <tr>
-                      <td>
-                          <p><strong>Field Technician</strong></p>
-                          <em><%= current_user.name %></em>
-                      </td>
-                  </tr>
-              </table>
-              </div>
-              <div class="row">
-                  <div id="satisfaction_guarantee" class="row">
-                <%= render :partial => 'satisfaction_guarantee' %>
-                <div class="sigPad">
-                  <p class="drawItDesc">Draw your initials</p>
-                  <ul class="sigNav">
-                    <li class="clearButton"><a href="#clear">Clear</a></li>
-                  </ul>
-                  <div class="sig sigWrapper">
-                    <div class="typed"></div>
-                    <canvas class="pad" width="198" height="55"></canvas>
-                    <%= f.hidden_field :satisfaction_guarantee_initials, class: "output"  %>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <%= render :partial => 'list_of_pests' %>
+                        <!--notes -->
+                        <!-- <h2>Notes</h2> -->
+                        <%# f.fields_for :notes do |notes_fields| %>
+                            <%# notes_fields.text_area :content, size: "24x6" %>
+                        <%# end %>
+                    </div>
+                    <div class="col-md-6">
+                      <h2>Big Toms Pest Control</h2>
+                      <h3>#1 in Pest Control Service</h3>
+                      <%= render :partial => 'fieldtech_name' %>
+                      <div class="row">
+                          <div id="satisfaction_guarantee" class="row">
+                              <%= render :partial => 'satisfaction_guarantee' %>
+                                <div class="sigPad">
+                                  <p class="drawItDesc">Draw your initials</p>
+                                  <ul class="sigNav">
+                                    <li class="clearButton"><a href="#clear">Clear</a></li>
+                                  </ul>
+                                  <div class="sig sigWrapper">
+                                    <div class="typed"></div>
+                                    <canvas class="pad" width="198" height="55"></canvas>
+                                    <%= f.hidden_field :satisfaction_guarantee_initials, class: "output"  %>
 
-                  </div>
+                                  </div>
+                                </div>
+                                <hr />
+                          </div>
+                      </div>
+                          <%= render :partial => 'addtional_services' %>
+                    </div>
                 </div>
-                <hr />
-                
-              </div>
-              </div>
-              <div class="row">
-                  <h2> Additional Services</h2>
-                  <% if @order %>
-                          <% if @order.order_items.count > 0 %>
-                          <%= render :partial => 'additional_services_tally', order: @order %>
-                          <% else %>
-                              <p>no additional service</p>
-                            <%= link_to "Add more service", order_path(@order) %>
-                          <% end %>
-                  <% else %>
-                      <!--do nothing -->
-                  <% end %>
-              </div>
-              
+                <div class="row">
+                    <%= render :partial => 'payment_info_box' %>
+                </div>
             </div>
-
+            
           </div>
-  
-  <div class="row">
-      <div class="col-md-12">
-          <%= render :partial => "terms_of_service" %>
-      </div>
-  </div>
+
+          <div class="row">
+              <div class="col-md-12">
+                  <%= render :partial => "terms_of_service" %>
+              </div>
+          </div>
   <div class="row">
       <div class="col-md-4">
           <div class="row">
