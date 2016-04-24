@@ -1,10 +1,11 @@
 require "rails_helper"
 
-feature 'User creates service agreement' do
+feature 'User completes service agreement' do
   let(:user) { create(:user) }
-  let(:account) { create(:account)}
-  let(:agreement) {}
-  # Create employee
+  let(:order) { create(:order, pay_type: "visa", :service_agreement => create(:service_agreement), :account => create(:account)) }
+  let(:agreement) { order.service_agreement }
+  
+  # let(:agreement) {create(:service_agreement, :account => create(:account))}
 
   # Sign in user before each test!
   before :each do
@@ -12,11 +13,11 @@ feature 'User creates service agreement' do
   end
 
   scenario 'successfully' do
-      visit account_path(account)
-      expect(current_path).to eq("/accounts/#{account.id}")
+      visit edit_service_agreement_path(agreement)
+      expect(current_path).to eq("something")
 
-      
-      click_on "Create service agreement"
-      expect(current_path).to eq(edit_service_agreement_path(account.service_agreements.last))
+      #
+      # click_on "Create service agreement"
+      # expect(current_path).to eq(edit_service_agreement_path(account.service_agreements.last))
   end
 end

@@ -1,33 +1,103 @@
-<div class="row">
-Service Agreement (part 2)
-</div>
-<div class="row">
-    <div class="col-md-4" id="agreement_attachment_button_column">
+              <% if @service_address.street_one.to_s.length < 3 %>
+                    <%= form_for [@account, @new_agreement_service_address]  do |addresses_form| %>
+                        <ul>
+                            <li>
 
- <%= render :partial => 'agreement_attachment_button', locals: {agreement: @agreement, current_order: @order} %>
- 
-    </div>
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-4">
-    </div>
-    <div class="col-md-2">
-        <div class="demo">
-            
-        </div>
-    </div>
-        
-</div>
-        <p class="cart-text"><%= render 'layouts/cart_text' %></p>
-<h3 class="text-center">Additional Services</h3>
+                                <%= addresses_form.label :street_one %><br >
+                                <%= addresses_form.text_field :street_one %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :street_two %><br >
+                                <%= addresses_form.text_field :street_two %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :city %><br >
+                                <%= addresses_form.text_field :city %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :state %><br >
+                                <%= addresses_form.text_field :state %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :postal_code %><br >
+                                <%= addresses_form.text_field :postal_code %>
+                
+                            </li>
+                                <%= addresses_form.hidden_field :is_billing, value: false %>
+                        </ul>
 
-<div class="row">
-  <div class="col-xs-6 col-xs-offset-3" id="service_list">
-      <ul>
-    <% @services.each do |service| %>
-        <%= render :partial => 'clickable_services_row', locals: {service: service, agreement: @agreement, order_item: @order_item } %>
-    <% end %>          
-      </ul>
-  </div>
-</div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <%= addresses_form.submit 'Add Service Location',  class: "btn btn-primary" %>
+                          </div>
+                    <% end %>
+                  
+              <% end %>
 
+              <% if @billing_address.street_one.to_s.length < 3 %>
+                    <%= form_for [@account, @new_agreement_billing_address] do |addresses_form| %>
+                        <ul>
+                            <li>
+
+                                <%= addresses_form.label :street_one %><br >
+                                <%= addresses_form.text_field :street_one %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :street_two %><br >
+                                <%= addresses_form.text_field :street_two %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :city %><br >
+                                <%= addresses_form.text_field :city %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :state %><br >
+                                <%= addresses_form.text_field :state %>
+                            </li>
+                            <li>
+                                <%= addresses_form.label :postal_code %><br >
+                                <%= addresses_form.text_field :postal_code %>
+                
+                            </li>
+                                <%= addresses_form.hidden_field :is_billing, value: true %>
+                        </ul>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <%= addresses_form.submit 'Add Billing Address',  class: "btn btn-primary" %>
+                          </div>
+                    <% end %>
+                  
+              <% end %>
+              
+
+              <% if @payment_method.card_number.to_s.length < 3 %>
+                    <%= form_for [@account, @new_payment_method] do |f| %>
+                        <ul>
+                            <li>
+
+                                <%= f.label :card_number %><br >
+                                <%= f.text_field :card_number %>
+                            </li>
+                            <li>
+                                <%= f.label :expiration %><br >
+                                <%= f.text_field :expiration %>
+                            </li>
+                            <li>
+                                <%= f.label :cvc %><br >
+                                <%= f.text_field :cvc %>
+                            </li>
+                        </ul>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <%= f.submit 'Add Payment Method',  class: "btn btn-primary" %>
+                          </div>
+
+                    <% end %>
+                  
+              <% end %>
+
+    <%= render :partial => "form" %>
+  
+<%= render :partial => 'add_service_address_modal', locals: {addressable: @account} %>

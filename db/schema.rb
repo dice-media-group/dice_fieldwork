@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415105307) do
+ActiveRecord::Schema.define(version: 20160424210843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,14 +38,12 @@ ActiveRecord::Schema.define(version: 20160415105307) do
     t.string   "city"
     t.string   "state"
     t.string   "postal_code"
-    t.integer  "addressable_id"
-    t.string   "addressable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.boolean  "is_billing"
+    t.integer  "service_agreement_id"
+    t.integer  "account_id"
   end
-
-  add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
 
   create_table "calendars", force: :cascade do |t|
     t.string   "name"

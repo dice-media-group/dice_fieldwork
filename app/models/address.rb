@@ -1,6 +1,8 @@
 class Address < ActiveRecord::Base
   # belongs_to :location'
-  belongs_to :addressable, polymorphic: true, :inverse_of => :addresses
+  # belongs_to :addressable, polymorphic: true, :inverse_of => :addresses
+  belongs_to :service_agreement
+  belongs_to :account
   
   def postal
     "#{street_one}, #{street_two}, #{city}, #{state}, #{postal_code}"

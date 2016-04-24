@@ -15,7 +15,7 @@ $(function () {
         <h4 class="modal-title" id="myModalLabel">Add Service Location</h4>
       </div>
       <div class="modal-body">
-            <%= form_for [addressable, @address], remote: true, html: {"data-type" => :json} do |addresses_form| %>
+            <%= form_for [@account, @new_agreement_service_address], remote: true, html: {"data-type" => :json} do |addresses_form| %>
         <ul>
             <li>
 
@@ -39,10 +39,6 @@ $(function () {
                 <%= addresses_form.text_field :postal_code %>
                 
             </li>
-                <%= addresses_form.hidden_field :is_billing, value: false %>
-                <div class="actions">
-                    
-                </div>
         </ul>
         
         

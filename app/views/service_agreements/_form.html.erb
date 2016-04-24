@@ -1,11 +1,11 @@
-<%= form_for [@account, @service_agreement] do |f| %>
-  <% if @service_agreement.errors.any? %>
+<%= form_for @agreement do |f| %>
+  <% if @agreement.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@service_agreement.errors.count, "error") %>
+      <h2><%= pluralize(@agreement.errors.count, "error") %>
       prohibited this account from being saved:</h2>
 
       <ul>
-      <% @service_agreement.errors.full_messages.each do |msg| %>
+      <% @agreement.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

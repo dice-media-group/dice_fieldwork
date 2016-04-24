@@ -33,12 +33,18 @@ class ServiceAgreementsController < ApplicationController
 
   def edit
     @agreement            = ServiceAgreement.find(params[:id])
+    @account              = @agreement.account
     gon.current_agreement = @agreement
     initial_date          = Date.today
     @services             = Service.currently_offered_as_part_of_service_agreement(Date.today)
     @order                = @agreement.orders.last
     @order_item           = @order.order_items.new
-    
+    @billing_address      = @account.addresses.all.find_billing_location(@account.addresses)
+    @service_address      = @account.addresses.all.find_service_location(@account.addresses)
+    @payment_method       = PaymentMethod.find_payment_method(@account.payment_methods)
+    @new_agreement_billing_address = @agreement.addresses.new(is_billing: true)
+    @new_agreement_service_address = @agreement.addresses.new(is_billing: false)
+    @new_payment_method   = @account.payment_methods.build
   end
 
   def show
