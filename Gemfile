@@ -71,7 +71,7 @@ end
 
 ## app specific gems
 # backend
-gem 'rails_12factor', '~> 0.0.3'
+# gem 'rails_12factor', '~> 0.0.3' #as of 4/23/16 creates an error. Add back when gem updates.
 gem 'rails_admin', '~> 0.7.0'
 # gem 'paper_trail', '~> 4.0.0'
 
