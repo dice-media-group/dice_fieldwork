@@ -76,7 +76,7 @@
             <% if @agreement %>
                 <%= link_to "View service agreement", service_agreement_path(@agreement) %> 
             <% else %>
-                <%= link_to "Create service agreement", new_account_service_agreement_path(@account) %>
+                <%= link_to "Create service agreement", account_service_agreements_path(@account), :method => :post %>
             <% end %>
             | <%= link_to "Back to accounts", accounts_path %>
         </div>

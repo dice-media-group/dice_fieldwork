@@ -1,0 +1,9 @@
+<!-- Modal -->
+<div  class="modal fade" id="<%= modal_id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <%= render :partial => 'form', locals: {account: account, address: address} %>
+</div>
+<!-- -->
+<div class="modal-header">
+<h3>New Product</h3>
+</div>
+<%= render "form" %>

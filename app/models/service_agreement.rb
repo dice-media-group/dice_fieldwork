@@ -7,4 +7,7 @@ class ServiceAgreement < ActiveRecord::Base
   
   belongs_to :user
   validates_associated :orders
+  
+  has_many :addresses
+  has_many :payment_methods
 end

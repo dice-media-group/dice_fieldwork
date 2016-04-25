@@ -2,10 +2,4 @@
     <li><%= "Card Number: #{PaymentMethod.mask_card_number(payment_method.card_number)}"  %></li>
     <li>Expiration: <%= payment_method.expiration %></li>
     <li>CVC: <%= payment_method.cvc %></li>
-    <li>
-        <%= "#{billing_address.street_one}" %><br />
-        <%= "#{billing_address.street_two}" %><br />
-        <%= "#{billing_address.city}, #{billing_address.state}  #{billing_address.postal_code}" %><br />
-        
-    </li>
 </ul>

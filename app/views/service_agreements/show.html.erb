@@ -46,7 +46,19 @@
           <h2> Additional Services</h2>
           <% if @order %>
               <% if @order.order_items.count > 0 %>
-              <%= render :partial => 'additional_services_tally', order: @order %>
+              <%= render :partial => "order_item", :collection => @order.order_items %>
+              <div class="row">
+                  <p>=================</p>
+              </div>
+              <div class="row">
+              <div class="col-md-6">
+                  <p>SUBTOTAL</p>
+              </div>
+              <div class="col-md-6">
+                  <%= "$#{@order.subtotal}" %>
+              </div>
+              <%= link_to "Edit order", order_path(@order) %>
+              
               <% else %>
                   <p>no additional service</p>
                 <%= link_to "Add more service", order_path(@order) %>

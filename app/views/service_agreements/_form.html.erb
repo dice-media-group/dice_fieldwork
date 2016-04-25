@@ -1,11 +1,11 @@
-<%= form_for [@account, @service_agreement] do |f| %>
-  <% if @service_agreement.errors.any? %>
+<%= form_for @agreement do |f| %>
+  <% if @agreement.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@service_agreement.errors.count, "error") %>
+      <h2><%= pluralize(@agreement.errors.count, "error") %>
       prohibited this account from being saved:</h2>
 
       <ul>
-      <% @service_agreement.errors.full_messages.each do |msg| %>
+      <% @agreement.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -28,18 +28,35 @@
                           locals: {service_address: @service_address, account: @account }  %>
                   <% else %>
                       <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-address-modal">
-                        Create Service Address
-                      </button>
+                  <%= link_to "New Service Address", new_account_address_path(account_id: @account.id, service_agreement_id: @agreement.id, is_billing: false), remote: true, class: "btn btn-primary" %>
                   
                   <% end %>
                   
               </div>
               <h2>Payment Information</h2>
-              <% if @payment_method.card_number.to_s.length > 2  && @billing_address.street_one.to_s.length > 2 %>
-                  <%= render :partial => 'payment_info', 
-                      locals: {payment_method: @payment_method, billing_address: @billing_address} %>
-              <% end %>
+              <div id="billing_location">
+                  <% if @billing_address.street_one.to_s.length > 2 %>
+                  <ul>
+                      <%= render :partial => 'addresses/postal_address', 
+                            locals: {address: @billing_address }  %>
+                  </ul>
+                  <% else %>
+                      <%= link_to "New Billing Address", new_account_address_path(account_id: @account.id, service_agreement_id: @agreement.id, is_billing: true), remote: true, class: "btn btn-primary" %>
+                
+                  <% end %>
+                  
+              </div>
+                  <div id="payment_method_info">
+                      <% if @payment_method.card_number.to_s.length > 2 %>
+                      
+                          <%= render :partial => 'payment_info', 
+                              locals: {payment_method: @payment_method} %>
+                      <% else %>
+                          <%= link_to "New Payment Method", new_account_payment_method_path(account_id: @account.id,
+                               service_agreement_id: @agreement.id),
+                               remote: true, class: "btn btn-primary" %>
+                      <% end %>
+                  </div>
               <div class="sigPad">
                   <p class="typeItDesc">Review your signature</p>
                   <p class="drawItDesc">Draw your signature</p>
@@ -58,7 +75,7 @@
             </div>
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-md-6 thin-rounded-box">
+                    <div class="col-md-6">
                         <%= render :partial => 'list_of_pests' %>
                         <!--notes -->
                         <!-- <h2>Notes</h2> -->
@@ -74,7 +91,7 @@
                       </div>
                       <div class="row">
                           <div id="satisfaction_guarantee" class="row thin-rounded-box">
-                              <div> render :partial => 'satisfaction_guarantee' </div>
+                              <div> <%= render :partial => 'satisfaction_guarantee' %> </div>
                                 <div class="sigPad">
                                   <p class="drawItDesc">Draw your initials</p>
                                   <ul class="sigNav">
@@ -90,11 +107,43 @@
                                 <hr />
                           </div>
                       </div>
-                          <%= render :partial => 'addtional_services' %>
+                          <div class="row thin-rounded-box">
+                              <h2> Additional Fees</h2>
+                              <% if @order %>
+                                  <div class="row">
+                                  <div class="col-md-12">
+                                  <% if @order.order_items.count > 0 %>
+                                  <%= render :partial => "order_item", :collection => @order.order_items %>
+                                  </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                      ==============
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                  <div class="col-md-6">
+                                      <p>SUBTOTAL</p>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <%= "$#{@order.subtotal}" %>
+                                  </div>
+              
+                                  
+                                    
+                                  <% end %>
+                                    <!-- Button trigger modal -->
+                                    <%= link_to "Add more services", edit_order_path(@order), remote: true, class: "btn btn-primary" %>
+                              <% else %>
+                                  <!--do nothing -->
+                              <% end %>
+                          </div>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-12">
                     <%= render :partial => 'payment_info_box' %>
+                    </div>
                 </div>
             </div>
             
@@ -153,5 +202,3 @@
       </div>
   </div>
 <% end %>
-
-    

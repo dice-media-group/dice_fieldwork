@@ -1,16 +1,16 @@
 FactoryGirl.define do
 
-  factory :user, class: User do |f|
+  factory :user do
     epoch_seconds = DateTime.now.strftime('%s').to_i
     random_number = Random.rand(epoch_seconds)
-    recent = 1.minute.ago
-    f.email {"user_#{rand(epoch_seconds).to_s}@factory.com" }
-    f.password '321secret'
+    first_name {"FirstName_#{random_number}"}
+    last_name {"LastName_#{random_number}"}
+    sequence(:email) { |n| "user_#{n}_#{random_number}@factory.com" }
+    
+    
+    password '321secret'
     # f.is_disabled false
-    f.is_admin        false
-    f.is_sales_rep    false
-    # f.property_name 'Test Property'
-    # f.sequence(:password_reset_token, 1000)  {|n| "#{random_number}#{n}c2vo9Gvy54kISg4Sg4c-nA"}
-    # f.password_reset_sent_at recent
+    is_admin        false
+    is_sales_rep    true
   end
 end

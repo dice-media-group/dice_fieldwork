@@ -1,17 +1,13 @@
 class AddressesController < ApplicationController
   before_filter :load_addressable
 
-  def create
-    @address = @addressable.addresses.new(address_params)
+  def new
+    @address = @addressable.addresses.new
 
-    respond_to do |format|
-      if @address.save
-        format.html { redirect_to new_account_service_agreement_path(@addressable) }
-        format.js
-      else
-        format.html { render action: 'new' }
-      end
-    end
+  end
+  def create
+    @addresses = Address.all
+    @address = Address.create(address_params)
 
   end
   
@@ -25,7 +21,7 @@ class AddressesController < ApplicationController
     @addressable  = klass.find(params["#{klass.name.underscore}_id"])
   end
     def address_params
-      params.require(:address).permit(:street_one, :street_two, :city, :state, :postal_code, :is_billing)
+      params.require(:address).permit(:street_one, :street_two, :city, :state, :postal_code, :is_billing, :service_agreement_id, :account_id)
     end
   
 end

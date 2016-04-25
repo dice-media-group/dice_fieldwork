@@ -1,0 +1,14 @@
+$("ul.errors").html("")
+<% if @address.errors.any? %>
+  <% @address.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+<% if @address.is_billing == true %>
+      $("#billing_location").html("<%= escape_javascript(render 'addresses/ajax_postal_address') %>")
+    
+    <% else %>
+      $("#service_address_info").html("<%= escape_javascript(render 'addresses/ajax_postal_address') %>")
+    <% end %>
+  $("#address-modal").modal("hide")
+<% end %>

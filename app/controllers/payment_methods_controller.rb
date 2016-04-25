@@ -1,28 +1,26 @@
 class PaymentMethodsController < ApplicationController
   before_filter :load_parent
+
+  def new
+    @payment_method = @parent.payment_methods.new
+  end
   
   def create
-    @payment_method = @parent.payment_methods.new(payment_methods_params)
-
-    respond_to do |format|
-      if @payment_method.save
-        format.html { redirect_to new_account_service_agreement_path(@parent) }
-        format.js
-      else
-        format.html { render action: 'new' }
-      end
-    end
-
+    @payment_methods = @parent.payment_methods.all
+    @payment_method = @parent.payment_methods.create(payment_methods_params)
+  end
+  
+  def update
   end
   
   private
 
   def load_parent
-    klass = [Account, ServiceAgreement].detect { |c| params["#{c.name.underscore}_id"]}
+    klass = [Account].detect { |c| params["#{c.name.underscore}_id"]}
     @parent  = klass.find(params["#{klass.name.underscore}_id"])
   end
     def payment_methods_params
-      params.require(:payment_method).permit(:card_number, :expiration, :cvc)
+      params.require(:payment_method).permit(:card_number, :expiration, :cvc, :account_id, :service_agreement_id)
     end
   
 end
