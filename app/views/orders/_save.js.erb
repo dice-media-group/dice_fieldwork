@@ -1,0 +1,19 @@
+$("ul.errors").html("")
+<% if @payment_method.errors.any? %>
+  <% @payment_method.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+      $("#payment_method_info").html("<%= escape_javascript(render 'payment_methods/ajax_payment_method') %>")
+  $("#payment-method-modal").modal("hide")
+<% end %>
+
+
+$("ul.errors").html("")
+<% if @payment_method.errors.any? %>
+  <% @payment_method.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#payment_method_info").html("<%= escape_javascript(render 'payment_methods/ajax_payment_method') %>")
+  $("#payment-method-modal").modal("hide")
+<% end %>

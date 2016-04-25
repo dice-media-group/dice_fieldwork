@@ -9,8 +9,17 @@ class OrdersController < ApplicationController
   end
 
   def new
+    @order  = Order.new
   end
 
+  def edit
+    @order   = Order.find(params[:id])
+    current_order         = @order
+    @agreement            = @order.service_agreement
+    @services             = Service.all #Service.currently_offered_as_part_of_service_agreement(Date.today)
+    @order_item           = @order.order_items.new
+    gon.order             = @order
+  end
   def show
     @order                = Order.find(params[:id])
     current_order         = @order

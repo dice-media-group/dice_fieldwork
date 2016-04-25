@@ -75,7 +75,7 @@
             </div>
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-md-6 thin-rounded-box">
+                    <div class="col-md-6">
                         <%= render :partial => 'list_of_pests' %>
                         <!--notes -->
                         <!-- <h2>Notes</h2> -->
@@ -91,7 +91,7 @@
                       </div>
                       <div class="row">
                           <div id="satisfaction_guarantee" class="row thin-rounded-box">
-                              <div> render :partial => 'satisfaction_guarantee' </div>
+                              <div> <%= render :partial => 'satisfaction_guarantee' %> </div>
                                 <div class="sigPad">
                                   <p class="drawItDesc">Draw your initials</p>
                                   <ul class="sigNav">
@@ -107,11 +107,43 @@
                                 <hr />
                           </div>
                       </div>
-                          <%= render :partial => 'addtional_services' %>
+                          <div class="row thin-rounded-box">
+                              <h2> Additional Fees</h2>
+                              <% if @order %>
+                                  <div class="row">
+                                  <div class="col-md-12">
+                                  <% if @order.order_items.count > 0 %>
+                                  <%= render :partial => "order_item", :collection => @order.order_items %>
+                                  </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                      ==============
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                  <div class="col-md-6">
+                                      <p>SUBTOTAL</p>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <%= "$#{@order.subtotal}" %>
+                                  </div>
+              
+                                  
+                                    
+                                  <% end %>
+                                    <!-- Button trigger modal -->
+                                    <%= link_to "Add more services", edit_order_path(@order), remote: true, class: "btn btn-primary" %>
+                              <% else %>
+                                  <!--do nothing -->
+                              <% end %>
+                          </div>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-12">
                     <%= render :partial => 'payment_info_box' %>
+                    </div>
                 </div>
             </div>
             
@@ -170,5 +202,3 @@
       </div>
   </div>
 <% end %>
-
-    

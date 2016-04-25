@@ -1,11 +1,11 @@
 <div class="row thin-rounded-box" id="Additional Service">
     <h2> Additional Services</h2>
+              <%# link_to "Add more service", order_path(@order) %>
     <% if @order %>
             <% if @order.order_items.count > 0 %>
             <%= render :partial => 'additional_services_tally', order: @order %>
             <% else %>
                 <p>no additional service</p>
-              <%= link_to "Add more service", order_path(@order) %>
             <% end %>
     <% else %>
         <!--do nothing -->
