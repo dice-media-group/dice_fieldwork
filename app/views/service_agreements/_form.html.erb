@@ -28,17 +28,31 @@
                           locals: {service_address: @service_address, account: @account }  %>
                   <% else %>
                       <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-address-modal">
-                        Create Service Address
-                      </button>
+                  <%= link_to "New Service Address", new_account_address_path(account_id: @account.id, service_agreement_id: @agreement.id, is_billing: false), remote: true, class: "btn btn-primary" %>
                   
                   <% end %>
                   
               </div>
               <h2>Payment Information</h2>
-              <% if @payment_method.card_number.to_s.length > 2  && @billing_address.street_one.to_s.length > 2 %>
+              <div id="billing_location">
+                  <% if @billing_address.street_one.to_s.length > 2 %>
+                  <ul>
+                      <%= render :partial => 'addresses/postal_address', 
+                            locals: {address: @billing_address }  %>
+                  </ul>
+                  <% else %>
+                      <%= link_to "New Billing Address", new_account_address_path(account_id: @account.id, service_agreement_id: @agreement.id, is_billing: true), remote: true, class: "btn btn-primary" %>
+                
+                  <% end %>
+                  
+              </div>
+              <% if @payment_method.card_number.to_s.length > 2 %>
                   <%= render :partial => 'payment_info', 
                       locals: {payment_method: @payment_method, billing_address: @billing_address} %>
+              <% else %>
+                  <%= link_to "New Payment Method", new_account_payment_method_path(account_id: @account.id,
+                       service_agreement_id: @agreement.id),
+                       remote: true, class: "btn btn-primary" %>
               <% end %>
               <div class="sigPad">
                   <p class="typeItDesc">Review your signature</p>

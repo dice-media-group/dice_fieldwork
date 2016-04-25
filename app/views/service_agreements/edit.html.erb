@@ -99,5 +99,25 @@
               <% end %>
 
     <%= render :partial => "form" %>
-  
-<%= render :partial => 'add_service_address_modal', locals: {addressable: @account} %>
+
+<script type="text/javascript">
+$(function () {
+  $("document").on("submit", ".new_address", function() {
+      $('#new-service-address-modal').modal("close");
+  });
+});
+</script>
+
+<div id="address-modal" class="modal fade"></div>
+
+<%#= render :partial => 'addresses/modal_form', locals: {account: @account, address: @new_agreement_service_address, modal_id: 'address-modal'} %>
+
+<script type="text/javascript">
+$(function () {
+  $("document").on("submit", ".new_address", function() {
+      $('#new-billing-address-modal').modal("close");
+  });
+});
+</script>
+
+<%#= render :partial => 'addresses/modal_form', locals: {account: @account, address: @new_agreement_billing_address, modal_id: 'new-billing-address-modal'} %>

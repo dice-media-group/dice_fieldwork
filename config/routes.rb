@@ -12,9 +12,9 @@ Rails.application.routes.draw do
 
   resources :accounts do
     resources :notes, only: [:index, :new]
-    resources :addresses, only: [:create]
+    resources :addresses, only: [:new, :create]
     resources :orders, only: [:create]
-    resources :payment_methods, only: [:create, :update]
+    resources :payment_methods, only: [:new, :create, :update]
     resources :service_agreements, shallow: true do
       resources :orders, shallow: true 
     end
