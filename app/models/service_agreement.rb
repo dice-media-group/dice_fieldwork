@@ -9,4 +9,5 @@ class ServiceAgreement < ActiveRecord::Base
   validates_associated :orders
   
   has_many :addresses
+  has_many :payment_methods
 end

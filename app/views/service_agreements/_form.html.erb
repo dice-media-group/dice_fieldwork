@@ -46,14 +46,17 @@
                   <% end %>
                   
               </div>
-              <% if @payment_method.card_number.to_s.length > 2 %>
-                  <%= render :partial => 'payment_info', 
-                      locals: {payment_method: @payment_method, billing_address: @billing_address} %>
-              <% else %>
-                  <%= link_to "New Payment Method", new_account_payment_method_path(account_id: @account.id,
-                       service_agreement_id: @agreement.id),
-                       remote: true, class: "btn btn-primary" %>
-              <% end %>
+                  <div id="payment_method_info">
+                      <% if @payment_method.card_number.to_s.length > 2 %>
+                      
+                          <%= render :partial => 'payment_info', 
+                              locals: {payment_method: @payment_method} %>
+                      <% else %>
+                          <%= link_to "New Payment Method", new_account_payment_method_path(account_id: @account.id,
+                               service_agreement_id: @agreement.id),
+                               remote: true, class: "btn btn-primary" %>
+                      <% end %>
+                  </div>
               <div class="sigPad">
                   <p class="typeItDesc">Review your signature</p>
                   <p class="drawItDesc">Draw your signature</p>

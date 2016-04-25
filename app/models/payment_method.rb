@@ -2,7 +2,7 @@ class PaymentMethod < ActiveRecord::Base
   include ActiveModel::Validations
   
   belongs_to :account
-  
+  belongs_to :service_agreement
   validates_each :card_number do |record, attr, value|
     is_valid_cc_number = CreditCard.new(value.to_s.delete(' ').delete('-')).valid?
     record.errors.add attr, 'invalid' if is_valid_cc_number == false
@@ -23,7 +23,7 @@ class PaymentMethod < ActiveRecord::Base
   def self.find_payment_method(payment_methods)
     if
       Array(payment_methods).count > 0
-      pm = payment_methods.first
+      pm = payment_methods.last
     else
       pm =  self.missing_payment_method
     end
