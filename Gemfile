@@ -5,10 +5,9 @@ ruby '2.2.2'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
-# Use twitter-bootstrap
-# gem 'bootstrap-sass', '~> 3.3.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 3.2'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -36,6 +35,9 @@ gem 'gon', '~> 6.0', '>= 6.0.1' #move ruby vars into js
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# Use twitter-bootstrap
+gem 'bootstrap-sass', '~> 3.3.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
