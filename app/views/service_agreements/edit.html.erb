@@ -1,4 +1,9 @@
-              <% if @service_address.street_one.to_s.length < 3 %>
+<div id="address-modal" class="modal fade"></div>
+
+<div id="payment-method-modal" class="modal fade"></div>
+
+<div id="order-modal" class="modal fade"></div>
+              <!-- <% if @service_address.street_one.to_s.length < 3 %>
                     <%= form_for [@account, @new_agreement_service_address]  do |addresses_form| %>
                         <ul>
                             <li>
@@ -21,7 +26,7 @@
                             <li>
                                 <%= addresses_form.label :postal_code %><br >
                                 <%= addresses_form.text_field :postal_code %>
-                
+
                             </li>
                                 <%= addresses_form.hidden_field :is_billing, value: false %>
                         </ul>
@@ -31,7 +36,7 @@
                             <%= addresses_form.submit 'Add Service Location',  class: "btn btn-primary" %>
                           </div>
                     <% end %>
-                  
+
               <% end %>
 
               <% if @billing_address.street_one.to_s.length < 3 %>
@@ -57,7 +62,7 @@
                             <li>
                                 <%= addresses_form.label :postal_code %><br >
                                 <%= addresses_form.text_field :postal_code %>
-                
+
                             </li>
                                 <%= addresses_form.hidden_field :is_billing, value: true %>
                         </ul>
@@ -67,11 +72,11 @@
                             <%= addresses_form.submit 'Add Billing Address',  class: "btn btn-primary" %>
                           </div>
                     <% end %>
-                  
-              <% end %>
-              
 
-              <% if @payment_method.card_number.to_s.length < 3 %>
+              <% end %>
+               -->
+
+              <!-- <% if @payment_method.card_number.to_s.length < 3 %>
                     <%= form_for [@account, @new_payment_method] do |f| %>
                         <ul>
                             <li>
@@ -95,32 +100,9 @@
                           </div>
 
                     <% end %>
-                  
-              <% end %>
+
+              <% end %> -->
 
     <%= render :partial => "form" %>
 
-<script type="text/javascript">
-$(function () {
-  $("document").on("submit", ".new_address", function() {
-      $('#new-service-address-modal').modal("close");
-  });
-});
-</script>
 
-<div id="address-modal" class="modal fade"></div>
-
-<%#= render :partial => 'addresses/modal_form', locals: {account: @account, address: @new_agreement_service_address, modal_id: 'address-modal'} %>
-
-<script type="text/javascript">
-$(function () {
-  $("document").on("submit", ".new_address", function() {
-      $('#new-billing-address-modal').modal("close");
-  });
-});
-</script>
-
-<%#= render :partial => 'addresses/modal_form', locals: {account: @account, address: @new_agreement_billing_address, modal_id: 'new-billing-address-modal'} %>
-<div id="payment-method-modal" class="modal fade"></div>
-
-<div id="order-modal" class="modal fade"></div>

@@ -38,8 +38,6 @@ class ServiceAgreementsController < ApplicationController
     initial_date          = Date.today
     @services             = Service.currently_offered_as_part_of_service_agreement(Date.today)
     @order                = @agreement.orders.last
-    @order_items           = @order.order_items
-    # @order_item           = @order.order_items.new
     @billing_address      = @agreement.addresses.all.find_billing_location(@agreement.addresses)
     @service_address      = @agreement.addresses.all.find_service_location(@agreement.addresses)
     @payment_method       = PaymentMethod.find_payment_method(@agreement.payment_methods)

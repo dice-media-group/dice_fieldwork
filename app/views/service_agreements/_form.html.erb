@@ -28,7 +28,11 @@
                           locals: {service_address: @service_address, account: @account }  %>
                   <% else %>
                       <!-- Button trigger modal -->
-                  <%= link_to "New Service Address", new_account_address_path(account_id: @account.id, service_agreement_id: @agreement.id, is_billing: false), remote: true, class: "btn btn-primary" %>
+                  <%= link_to "New Service Address", new_account_address_path(account_id: @account.id,
+                   service_agreement_id: @agreement.id, 
+                   is_billing: false), 
+                   remote: true, 
+                   class: "btn btn-primary" %>
                   
                   <% end %>
                   
@@ -140,12 +144,12 @@
                           </div>
                     </div>
                 </div>
+            </div>
                 <div class="row">
                     <div class="col-md-12">
                     <%= render :partial => 'payment_info_box' %>
                     </div>
                 </div>
-            </div>
             
           </div>
 
