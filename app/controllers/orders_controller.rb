@@ -30,20 +30,19 @@ class OrdersController < ApplicationController
   end
   
   def update
-    @order      = current_order
-    @order.service_agreement_id = params[:order][:service_agreement_id]
-    @order.account_id  = params[:order][:account_id]
-    @agreement = @order.service_agreement
+    # @orders = @parent.orders.all
+    
+    @order      = Order.find(params[:id])
 
-    respond_to do |format|
-      if @order.save!
-        format.html { redirect_to @agreement, notice: 'Order was successfully attached to the agreement.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @agreement.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @order.save!
+    #     format.html { redirect_to @agreement, notice: 'Order was successfully attached to the agreement.' }
+    #     format.json { head :no_content }
+    #   else
+    #     format.html { render action: 'edit' }
+    #     format.json { render json: @agreement.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
   
   private

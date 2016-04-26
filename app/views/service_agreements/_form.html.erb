@@ -107,33 +107,14 @@
                             <hr />
                       </div>
                   </div>
-                  <div class="row thin-rounded-box">
+                  <div class="row thin-rounded-box" id="additional_fees">
                       <h2> Additional Fees</h2>
-                      <% if @order %>
-                          <div class="row">
-                          <div class="col-md-12">
-                          <% if @order.order_items.count > 0 %>
-                          <%= render :partial => "order_item", :collection => @order.order_items %>
-                          </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-6">
-                              ==============
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <p>SUBTOTAL</p>
-                              </div>
-                          <div class="col-md-6">
-                              <%= "$#{@order.subtotal}" %>
-                          </div>
-                      <% end %>
+                      <div id="additional_order_items">
+                          <%= render :partial => 'additional_order_items' %>
+                      </div>
                       <!-- Button trigger modal -->
-                      <%= link_to "Add more services", edit_order_path(@order), remote: true, class: "btn btn-primary" %>
-                      <% else %>
-                          <!--do nothing -->
-                      <% end %>
+                      <%= link_to "Edit Order", edit_order_path(@order), remote: true, class: "btn btn-primary" %>
+                      
                   </div>
             </div>
         </div>

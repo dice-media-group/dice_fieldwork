@@ -8,12 +8,12 @@ Rails.application.routes.draw do
   
 
   devise_for :users
-  resources :services, :orders, :line_items, :consultations
+  resources :services, :line_items, :consultations
 
   resources :accounts do
     resources :notes, only: [:index, :new]
     resources :addresses, only: [:new, :create]
-    resources :orders, only: [:create]
+    resources :orders, shallow: true 
     resources :payment_methods, only: [:new, :create, :update]
     resources :service_agreements, shallow: true do
       resources :orders, shallow: true 

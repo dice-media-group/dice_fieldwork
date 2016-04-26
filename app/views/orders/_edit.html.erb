@@ -16,12 +16,13 @@
       </div>
     </div>
     <div class="modal-footer">
-        <%= link_to "Back to Service Order", "#", 
-            class: "btn", 
-            data: {dismiss: "modal"}, 
-            class: "btn btn-primary" %>
+        <%= form_for @order, remote: true, html: { style: "display:inline;" } do |f| %>
+        
+        <%= f.submit class: "btn btn-primary" %>
+        <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+        
     </div>
-
+        <% end %>
   </div>
 </div>
 
