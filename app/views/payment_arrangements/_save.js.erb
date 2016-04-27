@@ -1,0 +1,12 @@
+$("ul.errors").html("")
+<% if @arrangement.errors.any? %>
+    
+  <% @arrangement.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+    
+<% else %>
+      $("#payment_arrangement_info").html("<%= escape_javascript(render 'payment_arrangements/ajax_payment_arrangement') %>")
+  $("#payment-arrangement-modal").modal("hide")
+<% end %>
+

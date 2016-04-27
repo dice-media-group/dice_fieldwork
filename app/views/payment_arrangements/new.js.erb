@@ -1,0 +1,2 @@
+$("#payment-arrangement-modal").html("<%= escape_javascript(render 'payment_arrangements/new', locals: {payment_arrangement: @arrangement}) %>")
+$("#payment-arrangement-modal").modal("show")

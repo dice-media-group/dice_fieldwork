@@ -1,4 +1,4 @@
-<div class="row thin-rounded-box">
+<div class="row container">
     <div class="row" id="payment_info_box">
         <div class="col-md-6">
             <strong>Payment Information</strong>
@@ -54,3 +54,4 @@
         </div>
     </div>
 </div>
+                      <%= link_to "Edit", edit_payment_arrangement_path(@arrangement), remote: true, class: "btn btn-primary" if @arrangement %>

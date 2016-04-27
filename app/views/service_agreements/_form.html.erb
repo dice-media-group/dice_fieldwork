@@ -121,7 +121,19 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-        <%= render :partial => 'payment_info_box' %>
+            <div id="payment_arrangement_info" class = "thin-rounded-box container">
+                <% if @agreement.payment_arrangements.count > 0 %>
+                
+                    <%= render :partial => 'payment_info_box' %>
+                    <% else %>
+                        <!-- Button trigger modal -->
+                        <%= link_to "New Payment Arrangement",
+                         new_service_agreement_payment_arrangement_path(@agreement), 
+                         remote: true, 
+                         class: "btn btn-primary"  %>
+                    <% end %>
+            </div>
+            
         </div>
     </div>
   </div>

@@ -10,4 +10,5 @@ class ServiceAgreement < ActiveRecord::Base
   
   has_many :addresses
   has_many :payment_methods
+  has_many :payment_arrangements
 end

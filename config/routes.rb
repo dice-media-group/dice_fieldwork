@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :payment_arrangements
   get 'addresses/create'
 
   get 'addresses/update'
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
     resources :payment_methods, only: [:new, :create, :update]
     resources :service_agreements, shallow: true do
       resources :orders, shallow: true 
+      resources :payment_arrangements, shallow: true 
     end
     # resources :consultations, only: [:index, :new]
   end

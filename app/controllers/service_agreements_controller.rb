@@ -32,18 +32,20 @@ class ServiceAgreementsController < ApplicationController
   end
 
   def edit
-    @agreement            = ServiceAgreement.find(params[:id])
-    @account              = @agreement.account
-    gon.current_agreement = @agreement
-    initial_date          = Date.today
-    @services             = Service.currently_offered_as_part_of_service_agreement(Date.today)
-    @order                = @agreement.orders.last
-    @billing_address      = @agreement.addresses.all.find_billing_location(@agreement.addresses)
-    @service_address      = @agreement.addresses.all.find_service_location(@agreement.addresses)
-    @payment_method       = PaymentMethod.find_payment_method(@agreement.payment_methods)
+    @agreement              = ServiceAgreement.find(params[:id])
+    @account                = @agreement.account
+    gon.current_agreement   = @agreement
+    initial_date            = Date.today
+    @services               = Service.currently_offered_as_part_of_service_agreement(Date.today)
+    @order                  = @agreement.orders.last
+    @billing_address        = @agreement.addresses.all.find_billing_location(@agreement.addresses)
+    @service_address        = @agreement.addresses.all.find_service_location(@agreement.addresses)
+    @payment_method         = PaymentMethod.find_payment_method(@agreement.payment_methods)
+    @arrangement            = @agreement.payment_arrangements.last
     @new_agreement_billing_address = @agreement.addresses.new(is_billing: true)
     @new_agreement_service_address = @agreement.addresses.new(is_billing: false)
-    @new_payment_method   = @account.payment_methods.build
+    @new_payment_method     = @account.payment_methods.build
+    @new_payment_arrangement = @agreement.payment_arrangements.build
   end
 
   def show
