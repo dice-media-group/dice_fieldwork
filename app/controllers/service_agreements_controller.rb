@@ -55,6 +55,7 @@ class ServiceAgreementsController < ApplicationController
     @billing_address  = @account.addresses.all.find_billing_location(@account.addresses)
     @service_address  = @account.addresses.all.find_service_location(@account.addresses)
     @payment_method   = PaymentMethod.find_payment_method(@account.payment_methods)
+    @arrangement            = @agreement.payment_arrangements.last
     # @order_items      = @order.order_items
     
   end
@@ -77,14 +78,18 @@ class ServiceAgreementsController < ApplicationController
   def update
     # creates or updates the relationships of the order that belongs to the service agreement
     @agreement = ServiceAgreement.find(params[:id])
-    order = current_order
-    order.service_agreement = @agreement
+    order = @agreement.orders.last
     order.account = @agreement.account
     order.save!
     session.delete[:order_id] if session[:order_id]
-    format.html { redirect_to edit_service_agreement_path(@agreement),
-      notice: 'Order attached to service agreement and account.' }
-    
+    respond_to do |format|
+      if @agreement.save
+        format.html { redirect_to @agreement, notice: 'Agreement was successfully initiated.' }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @cart.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def current_order_item(service)

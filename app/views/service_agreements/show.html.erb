@@ -12,15 +12,22 @@
           <%= render :partial => 'customer_info', locals: {service_address: @service_address, account: @account }  %>
       <% end %>
       <h2>Payment Information</h2>
-      <% if @billing_address && @payment_method %>
-      <%= render :partial => 'payment_info', locals: {billing_address: @billing_address, payment_method: @payment_method } %>
-      <% end %>
-      <div class="creditCardSigPad signed">
-        <div class="sigWrapper">
-          <canvas class="pad" width="198" height="55"></canvas>
-        </div>
-        <p><%= @account.name %></p>
-      </div>
+          <div id="billing_location">
+              <% if @billing_address.street_one.to_s.length > 2 %>
+              <ul>
+                  <%= render :partial => 'addresses/postal_address', 
+                        locals: {address: @billing_address }  %>
+              </ul>
+              <% end %>
+          
+          </div>
+          <div id="payment_method_info">
+              <% if @payment_method.card_number.to_s.length > 2 %>
+          
+                  <%= render :partial => 'payment_info', 
+                      locals: {payment_method: @payment_method} %>
+              <% end %>
+          </div>
 
       <hr></hr>
       <%= render :partial => 'big_tom_contact_info' %>
@@ -43,33 +50,37 @@
         </div>
       </div>
       <div class="row">
-          <h2> Additional Services</h2>
-          <% if @order %>
-              <% if @order.order_items.count > 0 %>
-              <%= render :partial => "order_item", :collection => @order.order_items %>
-              <div class="row">
-                  <p>=================</p>
-              </div>
-              <div class="row">
-              <div class="col-md-6">
-                  <p>SUBTOTAL</p>
-              </div>
-              <div class="col-md-6">
-                  <%= "$#{@order.subtotal}" %>
-              </div>
-              <%= link_to "Edit order", order_path(@order) %>
-              
-              <% else %>
-                  <p>no additional service</p>
-                <%= link_to "Add more service", order_path(@order) %>
-              <% end %>
-          <% else %>
-              <!--do nothing -->
-          <% end %>
+                  <div class="row thin-rounded-box" id="additional_fees">
+                      <h2> Additional Fees</h2>
+                      <div id="additional_order_items">
+                          <%= render :partial => 'additional_order_items' %>
+                      </div>
+                      <!-- Button trigger modal -->
+                      <%= link_to "Edit Order", edit_order_path(@order), remote: true, class: "btn btn-primary" %>
+                      
+                  </div>
       </div>
           
       </div>
 
+    </div>
+  </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="payment_arrangement_info" class = "thin-rounded-box container">
+                <% if @agreement.payment_arrangements.count > 0 %>
+                
+                    <%= render :partial => 'payment_info_box' %>
+                    <% else %>
+                        <!-- Button trigger modal -->
+                        <%= link_to "New Payment Arrangement",
+                         new_service_agreement_payment_arrangement_path(@agreement), 
+                         remote: true, 
+                         class: "btn btn-primary"  %>
+                    <% end %>
+            </div>
+            
+        </div>
     </div>
   </div>
   <div class="row">
