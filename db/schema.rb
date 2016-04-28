@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427010938) do
+ActiveRecord::Schema.define(version: 20160427175610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,14 +162,15 @@ ActiveRecord::Schema.define(version: 20160427010938) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "payment_arrangements", force: :cascade do |t|
-    t.decimal  "initial_charge_amount",   precision: 12, scale: 3, default: 0.0, null: false
-    t.decimal  "recurring_charge_amount", precision: 12, scale: 3, default: 0.0, null: false
+    t.decimal  "initial_charge_amount",      precision: 12, scale: 3, default: 0.0, null: false
+    t.decimal  "recurring_charge_amount",    precision: 12, scale: 3, default: 0.0, null: false
     t.text     "customer_initials"
     t.integer  "service_agreement_id"
     t.string   "payment_frequency"
     t.date     "start_date"
-    t.datetime "created_at",                                                     null: false
-    t.datetime "updated_at",                                                     null: false
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
+    t.string   "payment_method_description"
   end
 
   add_index "payment_arrangements", ["service_agreement_id"], name: "index_payment_arrangements_on_service_agreement_id", using: :btree

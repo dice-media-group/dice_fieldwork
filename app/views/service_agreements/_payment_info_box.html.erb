@@ -4,7 +4,7 @@
             <strong>Payment Information</strong>
         </div>
         <div class="col-md-6">
-            [payment]  [Credit Card] [Check]
+            [payment]  <%= highlight("[Credit Card] [Check]", @arrangement.payment_method_description) %>
         </div>
     </div>
     <div class="row">
@@ -12,10 +12,10 @@
             <strong>initial Charge</strong>
         </div>
         <div class="col-md-4">
-            [209.50] _______________
+            [209.50] <%= "%.2f" % @arrangement.initial_charge_amount.truncate(2)  if @arrangement.recurring_charge_amount %>
         </div>
         <div class="col-md-5">
-            Date ________________
+            Date <%= @arrangement.start_date if @arrangement.start_date %>
         </div>
     </div>
     <div class="row">
@@ -25,22 +25,12 @@
                     <strong>Recurring Charge</strong>
                 </div>
                 <div class="col-md-8">
-                    [149.00 ____________]
+                    [149.00] <%= "%.2f" % @arrangement.recurring_charge_amount.truncate(2)  if @arrangement.recurring_charge_amount %>
                 </div>
             </div>
             <div class="row">
-                    <div class="col-md-3">
-                        [Monthly]
-                    </div>
-                    <div class="col-md-3">
-                        [Bi Monthly]
-                    </div>
-                    <div class="col-md-3">
-                        [Quarterly]
-                    </div>
-                    <div class="col-md-3">
-                        [Pay in full]
-                    </div>
+            <div class="col-md-12">
+                <%= highlight("Monthly   Bi-Monthly  Quarterly Pay in Full", @arrangement.payment_frequency) %>
             </div>
             <div class="row">
                 <div class="col-md-12">

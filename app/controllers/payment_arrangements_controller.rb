@@ -1,8 +1,12 @@
 class PaymentArrangementsController < ApplicationController
-  before_filter :load_parent
+  before_filter :load_parent, only: [:new, :create, :index]
 
   def new
     @arrangement = @parent.payment_arrangements.new
+  end
+
+  def edit
+    @arrangement = PaymentArrangement.find(params[:id])
   end
   
   def create
@@ -11,6 +15,9 @@ class PaymentArrangementsController < ApplicationController
   end
   
   def update
+    @arrangement = PaymentArrangement.find(params[:id])
+
+    @arrangement.update_attributes(payment_arrangements_params)    
   end
   
   private
