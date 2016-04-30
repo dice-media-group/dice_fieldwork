@@ -30,19 +30,14 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(account_params)
-
-    respond_to do |format|
-      if @account.save
-        format.html { redirect_to @account,
-          notice: 'Account was successfully created.' }
-        format.json { render action: 'edit', status: :created,
-          location: @account }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @account.errors,
-          status: :unprocessable_entity }
-      end
+    @accounts = Account.all
+    @account = Account.create(account_params)
+    
+    if @account.save!
+      agreement_id = params[:agreement_id]
+      agreement     = ServiceAgreement.find(agreement_id)
+      agreement.account_id = @account.id
+      agreement.save!
     end
   end
 
@@ -86,7 +81,13 @@ class AccountsController < ApplicationController
                 :email, 
                 :no_customer_email_address, 
                 :primary_phone_number, 
-                :secondary_phone_number)
+                :secondary_phone_number,
+                :is_business, 
+                :company_name, 
+                :mobile_phone, 
+                :fax, 
+                :referral_source,
+                :service_agreement_id)
       end
 
 end

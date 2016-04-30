@@ -1,0 +1,12 @@
+$("ul.errors").html("")
+<% if @account.errors.any? %>
+    
+  <% @account.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+    
+<% else %>
+      $("#account_info").html("<%= escape_javascript(render 'accounts/ajax_account') %>")
+  $("#account-modal").modal("hide")
+<% end %>
+
