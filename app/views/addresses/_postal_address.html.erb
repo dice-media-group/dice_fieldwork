@@ -1,5 +1,24 @@
-<%= "#{address.street_one}" %><br />
-<%= "#{address.street_two}" %><br />
-<%= "#{address.city}" %><br />
-<%= "#{address.state}" %><br />
-<%= "#{address.postal_code}" %><br />
+<div class="row">
+  <div class="col-md-6">Street
+  </div>
+  <div class="col-md-6"><%= "#{address.street_one}" %>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">Street
+  </div>
+  <div class="col-md-6"><%= "#{address.street_two}" %>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">City, State, and Zip
+  </div>
+  <div class="col-md-6"><%= "#{address.city}  #{address.state}  #{address.postal_code}" %>
+
+  </div>
+</div>
+

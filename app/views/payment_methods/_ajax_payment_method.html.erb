@@ -1,3 +1,25 @@
-<%= "Card Number:      #{@payment_method.card_number}" %><br />
-<%= "Expriation Date:  #{@payment_method.expiration}" %><br />
-<%= "CVC Number:       #{@payment_method.cvc}" %>
+<strong>Payment Method</strong>
+<div class="row">
+  <div class="col-md-6">Card Number
+  </div>
+  <div class="col-md-6"><%= "#{PaymentMethod.mask_card_number(@payment_method.card_number)}"  %></li>
+
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">Expiration
+  </div>
+  <div class="col-md-6"><%= @payment_method.expiration %>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">CVC
+  </div>
+  <div class="col-md-6"><%= @payment_method.cvc %>
+
+  </div>
+</div>

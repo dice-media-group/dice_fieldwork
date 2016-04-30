@@ -1,3 +1,67 @@
-<li>email <%= @account.email %> </li>
-<li>primary phone <%= @account.primary_phone_number %> </li>
-<li>secondary phone <%= @account.secondary_phone_number %> </li>
+<div class="row">
+  <div class="col-md-6">Name
+  </div>
+  <div class="col-md-6"><%= @account.name %> 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">email
+  </div>
+  <div class="col-md-6"><%= @account.email %> 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">primary
+  </div>
+  <div class="col-md-6"><%= @account.primary_phone_number %> 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">secondary
+  </div>
+  <div class="col-md-6"><%= @account.secondary_phone_number %> 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">mobile_phone
+  </div>
+  <div class="col-md-6"><%= @account.mobile_phone %> 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">fax
+  </div>
+  <div class="col-md-6"><%= @account.fax %> 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">referral_source
+  </div>
+  <div class="col-md-6"><%= @account.referral_source %> 
+  </div>
+</div>
+
+<% if @account.is_business? %>
+    <li><%= "Business: #{account.company_name}" if @account.is_business? %> </li>    
+
+<% end %>
+
+<!-- <div class="row">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-6">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-6">
+  </div>
+</div> -->
