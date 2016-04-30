@@ -83,7 +83,7 @@ class ServiceAgreementsController < ApplicationController
     order.save!
     session.delete[:order_id] if session[:order_id]
     respond_to do |format|
-      if @agreement.save
+      if @agreement.update_attributes(agreement_params)
         format.html { redirect_to @agreement, notice: 'Agreement was successfully initiated.' }
       else
         format.html { render action: 'edit' }
@@ -100,7 +100,7 @@ class ServiceAgreementsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white
     # list through.
     def agreement_params
-      params.require(:service_agreement).permit(:field_tech_signature, :customer_signature,
+      params.require(:service_agreement).permit(:credit_card_signature, :field_tech_signature, :customer_signature,
         :customers_initials_for_charges, :satisfaction_guarantee_initials, :account_id) if params[:service_agreement]
         # ,
         # :credit_card_signature, :notes => [:content], order_attributes: [:pay_type])
