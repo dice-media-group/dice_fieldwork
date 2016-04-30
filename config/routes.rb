@@ -11,14 +11,16 @@ Rails.application.routes.draw do
   devise_for :users
   resources :services, :line_items, :consultations
 
+  resources :service_agreements
+    
   resources :accounts do
     resources :notes, only: [:index, :new]
-    resources :addresses, only: [:new, :create]
     resources :orders, shallow: true 
-    resources :payment_methods, only: [:new, :create, :update]
     resources :service_agreements, shallow: true do
+      resources :addresses, only: [:new, :create]
       resources :orders, shallow: true 
       resources :payment_arrangements, shallow: true 
+      resources :payment_methods, only: [:new, :create, :update]
     end
     # resources :consultations, only: [:index, :new]
   end

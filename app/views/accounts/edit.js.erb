@@ -1,0 +1,2 @@
+$("#account-modal").html("<%= escape_javascript(render 'accounts/edit', locals: {account: @account}) %>")
+$("#account-modal").modal("show")

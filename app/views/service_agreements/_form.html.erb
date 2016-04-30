@@ -19,16 +19,32 @@
     <% end %>
 
       <div class="row">
-        <div class="col-md-4 thin-rounded-box">
-          <p class="cart-text"></p>
+        <div class="col-md-4 thin-rounded-box light-grey-background">
           <h2>Customer Information</h2>
+              <ul>
+                <div id="account_info">
+                  <% if @agreement.account %>
+                      <%= render :partial => 'account_info', locals: {account: @account} %>
+
+                  <% else %>
+                    <!-- Button trigger modal -->
+                    <%= link_to "New Account", 
+                        new_account_path(agreement_id: @agreement.id), 
+                            remote: true, 
+                            class: "btn btn-primary" %>
+                  
+                  <% end %>
+                </div>
+                </ul>
           <div id="service_address_info">
+              <ul>
               <% if @service_address.street_one.to_s.length > 0 %>
                 <%= render :partial => 'customer_info', 
                       locals: {service_address: @service_address, account: @account }  %>
+              </ul>
               <% else %>
                   <!-- Button trigger modal -->
-              <%= link_to "New Service Address", new_account_address_path(account_id: @account.id, service_agreement_id: @agreement.id, is_billing: false), remote: true, class: "btn btn-primary" %>
+              <%= link_to "New Service Address", new_service_agreement_address_path(service_agreement_id: @agreement.id, is_billing: false), remote: true, class: "btn btn-primary" %>
           
               <% end %>
           
@@ -41,7 +57,7 @@
                         locals: {address: @billing_address }  %>
               </ul>
               <% else %>
-                  <%= link_to "New Billing Address", new_account_address_path(account_id: @account.id, service_agreement_id: @agreement.id, is_billing: true), remote: true, class: "btn btn-primary" %>
+                  <%= link_to "New Billing Address", new_service_agreement_address_path(service_agreement_id: @agreement.id, is_billing: true), remote: true, class: "btn btn-primary" %>
         
               <% end %>
           
@@ -52,8 +68,8 @@
                   <%= render :partial => 'payment_info', 
                       locals: {payment_method: @payment_method} %>
               <% else %>
-                  <%= link_to "New Payment Method", new_account_payment_method_path(account_id: @account.id,
-                       service_agreement_id: @agreement.id),
+                  <%= link_to "New Payment Method",
+                   new_service_agreement_payment_method_path(service_agreement_id: @agreement.id),
                        remote: true, class: "btn btn-primary" %>
               <% end %>
           </div>
@@ -119,11 +135,6 @@
             </div>
         </div>
     </div>
-  <div class="row">
-      <div class="col-md-12">
-          <%= render :partial => 'terms_of_service' %>
-      </div>
-  </div>
     <div class="row">
         <div class="col-md-12">
             <div id="payment_arrangement_info" class = "thin-rounded-box container">
@@ -192,6 +203,7 @@
       </div>
   </div>
   <div class="actions">
+    <%= f.submit 'Initiate Service Agreement', :class => 'btn btn-lg btn-primary btn-block' %>
     <%= f.submit 'Initiate Service Agreement', :class => 'btn btn-lg btn-primary btn-block' %>
   </div>
 <% end %>

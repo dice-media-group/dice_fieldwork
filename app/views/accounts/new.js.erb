@@ -1,0 +1,2 @@
+$("#account-modal").html("<%= escape_javascript(render 'accounts/new', locals: {agreement: @agreement}) %>")
+$("#account-modal").modal("show")

@@ -42,10 +42,11 @@ class ServiceAgreementsController < ApplicationController
     @service_address        = @agreement.addresses.all.find_service_location(@agreement.addresses)
     @payment_method         = PaymentMethod.find_payment_method(@agreement.payment_methods)
     @arrangement            = @agreement.payment_arrangements.last
+    # @new_account            = @agreement.account.new
     @new_agreement_billing_address = @agreement.addresses.new(is_billing: true)
     @new_agreement_service_address = @agreement.addresses.new(is_billing: false)
-    @new_payment_method     = @account.payment_methods.build
-    @new_payment_arrangement = @agreement.payment_arrangements.build
+    @new_payment_method            = @agreement.payment_methods.build
+    @new_payment_arrangement       = @agreement.payment_arrangements.build
   end
 
   def show
@@ -61,9 +62,8 @@ class ServiceAgreementsController < ApplicationController
   end
 
   def create
-    @account    = Account.find(params[:account_id])
+    # @account    = Account.find(params[:account_id])
     @agreement  = current_user.service_agreements.new agreement_params
-    @agreement.account_id = @account.id
     
       if @agreement.save
         @order = @agreement.orders.create!(user_id: current_user.id)

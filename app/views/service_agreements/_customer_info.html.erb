@@ -1,14 +1,5 @@
-<ul>
-    <li>Name <%= account.name %> </li>
-    <% if account.is_business? %>
-    <li><%= "Business: #{account.company_name}" if account.is_business? %> </li>    
-    <% end %>
     <li>
         <%= "#{service_address.street_one}" %><br />
         <%= "#{service_address.street_two}" %><br />
         <%= "#{service_address.city}  #{service_address.state}  #{service_address.postal_code}" %><br />
     </li>
-    <li>email <%= account.email %> </li>
-    <li>primary phone <%= account.primary_phone_number %> </li>
-    <li>secondary phone <%= account.secondary_phone_number %> </li>
-</ul>
