@@ -19,18 +19,13 @@
     <% end %>
 
       <div class="row">
-        <div class="col-md-4 thin-rounded-box">
-          <p class="cart-text"></p>
+        <div class="col-md-4 thin-rounded-box light-grey-background">
           <h2>Customer Information</h2>
               <ul>
                 <div id="account_info">
                   <% if @agreement.account %>
                       <%= render :partial => 'account_info', locals: {account: @account} %>
-                  
-                      <li>Name: <%#= account.name %> </li>
-                      <%# if account.is_business? %>
-                          <li><%#= "Business: #{account.company_name}" if account.is_business? %> </li>    
-                      <%# end %>
+
                   <% else %>
                     <!-- Button trigger modal -->
                     <%= link_to "New Account", 
