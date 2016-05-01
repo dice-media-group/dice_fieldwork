@@ -1,5 +1,5 @@
 <% if @order %>
-    <div class="row">
+    <div class="row container">
     <%= render :partial => "service_agreements/order_item", 
         :collection => @order.order_items if @order.order_items.count > 0 %>
     </div>
@@ -10,10 +10,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <p>SUBTOTAL</p>
+            SUBTOTAL         <%= number_to_currency @order.subtotal %>
         </div>
     <div class="col-md-6">
-        <%= "$#{@order.subtotal}" %>
     </div>
 <% end %>

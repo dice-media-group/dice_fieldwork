@@ -4,7 +4,7 @@
             <strong>Payment Information</strong>
         </div>
         <div class="col-md-6">
-            [payment]  <%= highlight("[Credit Card] [Check]", @arrangement.payment_method_description) %>
+            [payment]  <%= highlight("[Credit Card] [Check], [Cash]", @arrangement.payment_method_description) %>
         </div>
     </div>
     <div class="row">
@@ -30,7 +30,7 @@
             </div>
             <div class="row">
             <div class="col-md-12">
-                <%= highlight("Monthly   Bi-Monthly  Quarterly Pay in Full", @arrangement.payment_frequency) %>
+                <strong><%= @arrangement.payment_frequency %></strong>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -39,9 +39,29 @@
             </div>
         </div>
         <div class="col-md-4">
-                [initial here]
-                [initial here]
+         <% if @arrangement && @arrangement.customer_initials %>
+          <div class ="row partys_signature">
+              <div class="paymentArrangementInitialsSigPad signed">
+                <div class="sigWrapper">
+                  <canvas class="pad" width="198" height="55"></canvas>
+                </div>
+              </div>
+          </div>
+          <% end %>
         </div>
     </div>
 </div>
                       <%= link_to "Edit", edit_payment_arrangement_path(@arrangement), remote: true, class: "btn btn-primary" if @arrangement %>
+<!--supporting scripts for displaying signature -->
+                      
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+  <script src="https://thomasjbradley.github.io/signature-pad/jquery.signaturepad.js"></script>
+  <script>
+      payment_arrangement_initials = <%= raw @arrangement.customer_initials %>
+    $(document).ready(function() {
+      $('.paymentArrangementInitialsSigPad').signaturePad({displayOnly:true}).regenerate(payment_arrangement_initials);
+    });
+
+  </script>
+  <script src="https://thomasjbradley.github.io/signature-pad/assets/json2.min.js"></script>
+<!--finish -->

@@ -11,4 +11,6 @@ class ServiceAgreement < ActiveRecord::Base
   has_many :addresses
   has_many :payment_methods
   has_many :payment_arrangements
+  
+  accepts_nested_attributes_for :payment_arrangements
 end

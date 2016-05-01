@@ -6,18 +6,33 @@
 </div>
 
   <div class="row">
-    <div class="col-md-4">
+        <div class="col-md-4 thin-rounded-box light-grey-background">
       <h2>Customer Information</h2>
-      <% if @service_address && @account %>
-          <%= render :partial => 'customer_info', locals: {service_address: @service_address, account: @account }  %>
-      <% end %>
+            <div id="account_info">
+              <% if @agreement.account %>
+                  <%= render :partial => 'account_info', locals: {account: @account} %>
+              <% end %>
+            </div>
+
+          <div id="service_address_info">
+              <% if @service_address.street_one.to_s.length > 0 %>
+                <div class="row">
+                    <strong>Service Location</strong>
+                </div>
+                <%= render :partial => 'customer_info', 
+                      locals: {service_address: @service_address, account: @account }  %>
+              <% end %>
+          
+          </div>
+
       <h2>Payment Information</h2>
           <div id="billing_location">
               <% if @billing_address.street_one.to_s.length > 2 %>
-              <ul>
+                  <div class="row">
+                      <strong>Billing Location</strong>
+                  </div>
                   <%= render :partial => 'addresses/postal_address', 
                         locals: {address: @billing_address }  %>
-              </ul>
               <% end %>
           
           </div>
@@ -46,8 +61,8 @@
     <div class="col-md-4">
       <h2>Big Toms Pest Control</h2>
       <h3>#1 in Pest Control Service</h3>
-      <div id="fieldtech_name" >
-          <em>fieldtech name goes here</em>
+      <div class="row thin-rounded-box">
+          <%= render :partial => 'fieldtech_name' %>
       </div>
       <div id="satisfaction_guarantee">
           <%= render :partial => 'satisfaction_guarantee' %>
@@ -58,7 +73,7 @@
         </div>
       </div>
       <div class="row">
-                  <div class="row thin-rounded-box" id="additional_fees">
+                  <div class="row thin-rounded-box container" id="additional_fees">
                       <h2> Additional Fees</h2>
                       <div id="additional_order_items">
                           <%= render :partial => 'additional_order_items' %>

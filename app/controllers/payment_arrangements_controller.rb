@@ -28,6 +28,6 @@ class PaymentArrangementsController < ApplicationController
   end
   
   def payment_arrangements_params
-    params.require(:payment_arrangement).permit(:initial_charge_amount, :recurring_charge_amount, :customer_initials, :service_agreement_id, :payment_frequency, :start_date)
+    params.require(:payment_arrangement).permit(:initial_charge_amount, :recurring_charge_amount, :customer_initials, :service_agreement_id, :payment_frequency, :start_date, :payment_method_description)
   end
 end
