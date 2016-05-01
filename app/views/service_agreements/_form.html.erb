@@ -77,7 +77,7 @@
                        remote: true, class: "btn btn-primary" %>
               <% end %>
           </div>
-          <% if @arrangement.customer_initials %>
+          <% if @arrangement && @arrangement.customer_initials %>
           <em>** already signed</em>
           <% else %>
           
@@ -117,7 +117,7 @@
                   <div class="row">
                       <div id="satisfaction_guarantee" class="row thin-rounded-box">
                           <div> <%= render :partial => 'satisfaction_guarantee' %> </div>
-                            <% if @arrangement.customer_initials %>
+                            <% @arrangement && if @arrangement.customer_initials %>
                             <em>** already signed</em>
                             <% else %>
                             
@@ -235,7 +235,7 @@
   <div class="row">
       <div class="col-md-4">
           <div class="row">
-              <% if @arrangement.customer_initials %>
+              <% if @arrangement && @arrangement.customer_initials %>
               <em>** already signed</em>
               <% else %>
               
@@ -262,7 +262,7 @@
       </div>
       <div class="col-md-4">
           <div class="row">
-              <% if @arrangement.customer_initials %>
+              <% if @arrangement && @arrangement.customer_initials %>
               <em>** already signed</em>
               <% else %>
               
