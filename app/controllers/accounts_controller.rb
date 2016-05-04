@@ -43,6 +43,7 @@ class AccountsController < ApplicationController
       end
 
       respond_to do |format|
+        format.js
         format.html { redirect_to @account,
           notice: 'Account was successfully created.' }
         format.json { head :no_content }
