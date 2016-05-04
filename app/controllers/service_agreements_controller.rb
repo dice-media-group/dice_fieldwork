@@ -62,8 +62,8 @@ class ServiceAgreementsController < ApplicationController
   end
 
   def create
-    # @account    = Account.find(params[:account_id])
     @agreement  = current_user.service_agreements.new agreement_params
+    @agreement.account_id = params[:account_id].to_i if params[:account_id]
     
       if @agreement.save
         @order = @agreement.orders.create!(user_id: current_user.id)

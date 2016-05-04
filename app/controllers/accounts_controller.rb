@@ -34,10 +34,19 @@ class AccountsController < ApplicationController
     @account = Account.create(account_params)
     
     if @account.save!
-      agreement_id = params[:agreement_id]
-      agreement     = ServiceAgreement.find(agreement_id)
-      agreement.account_id = @account.id
-      agreement.save!
+      agreement_id = params[:agreement_id].to_i
+      
+      if agreement_id > 0 # the agreement_id will be 0 if there is no agreement
+        agreement     = ServiceAgreement.find(agreement_id)
+        agreement.account_id = @account.id
+        agreement.save!
+      end
+
+      respond_to do |format|
+        format.html { redirect_to @account,
+          notice: 'Account was successfully created.' }
+        format.json { head :no_content }
+      end
     end
   end
 

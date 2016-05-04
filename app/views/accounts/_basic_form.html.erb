@@ -1,0 +1,61 @@
+    <%= form_for @account do |f| %>
+        <ul class="errors"></ul>
+
+        <div class="form-group">
+            <h2>This is account is a…</h2><br />
+            <%= f.radio_button :is_business, 'false' %> Person<br />
+            <%= f.radio_button :is_business, 'true' %> Business<br />
+        </div>
+
+        <div class="form-group">
+            <%= f.label :company_name, class:"control-label"  %><br>
+            <%= f.text_field :company_name, class: "form-control"  %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :first_name, class:"control-label"  %><br>
+            <%= f.text_field :first_name, class: "form-control"  %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :last_name, class:"control-label" %>
+          <%= f.text_field :last_name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email, class:"control-label" %>
+          <%= f.text_field :email, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :primary_phone_number, class:"control-label" %>
+          <%= f.text_field :primary_phone_number, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :secondary_phone_number, class:"control-label" %>
+          <%= f.text_field :secondary_phone_number, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :mobile_phone, class:"control-label" %>
+          <%= f.text_field :mobile_phone, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :fax, class:"control-label" %>
+          <%= f.text_field :fax, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :referral_source, class:"control-label" %>
+          <%= f.text_field :referral_source, class: "form-control" %>
+        </div>
+        
+        <%= hidden_field_tag(:agreement_id, params[:agreement_id].to_i) %>
+
+      <div class="actions">
+        <%= f.submit class: "btn btn-primary" %>
+        <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+      </div>
+    <% end %>
