@@ -1,9 +1,9 @@
 class Account < ActiveRecord::Base
   has_many :notes, as: :notable, :inverse_of => :notable
   has_many :addresses
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :email, presence: true, allow_blank: true
+  # validates :first_name, presence: true
+  # validates :last_name, presence: true
+  # validates :email, presence: true, allow_blank: true
 
   has_many :consultations
   has_many :users, :through => :consultations
