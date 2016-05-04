@@ -111,13 +111,13 @@
                 <div class="col-md-6">
                   <h2>Big Toms Pest Control</h2>
                   <h3>#1 in Pest Control Service</h3>
-                  <div class="row thin-rounded-box">
+                  <div class="row">
                       <%= render :partial => 'fieldtech_name' %>
                   </div>
                   <div class="row">
                       <div id="satisfaction_guarantee" class="row thin-rounded-box">
                           <div> <%= render :partial => 'satisfaction_guarantee' %> </div>
-                            <% @arrangement && if @arrangement.customer_initials %>
+                            <% @agreement && if @agreement.satisfaction_guarantee_initials %>
                             <em>** already signed</em>
                             <% else %>
                             
@@ -137,7 +137,7 @@
                             <hr />
                       </div>
                   </div>
-                  <div class="row thin-rounded-box container" id="additional_fees">
+                  <div class="row" id="additional_fees">
                       <h2> Additional Fees</h2>
                       <div id="additional_order_items">
                           <%= render :partial => 'additional_order_items' %>
@@ -157,14 +157,6 @@
                     <%= render :partial => 'payment_info_box' %>
                     <% else %>
 <!--start nested payment_arrangements form -->
-                    <%= f.fields_for :payment_arrangements do |payment_arrangement_fields| %>
-                    <fieldset>
-                      <%= payment_arrangement_fields.label :initial_charge_amount %>
-                      <%= payment_arrangement_fields.text_field :initial_charge_amount %>
-                  </fieldset>
-                      
-                    <% end %>
-                    
                         <div class="row container">
                             <div class="row" id="payment_info_box">
                                 <div class="col-md-6">
