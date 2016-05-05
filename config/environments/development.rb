@@ -42,6 +42,7 @@ Rails.application.configure do
   
   ## email config for gmail
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: "localhost:3049"}
   
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
@@ -53,5 +54,4 @@ Rails.application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
   
-  config.action_mailer.default_url_options = { host: "localhost:3049"}
 end
