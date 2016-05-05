@@ -84,6 +84,10 @@ class ServiceAgreementsController < ApplicationController
     session.delete[:order_id] if session[:order_id]
     respond_to do |format|
       if @agreement.update_attributes(agreement_params)
+        #send email 
+        # Tell the AccountMailer to send a welcome email after save
+        UserMailer.welcome_email(@account).deliver_later
+                
         format.html { redirect_to @agreement, notice: 'Agreement was successfully initiated.' }
       else
         format.html { render action: 'edit' }

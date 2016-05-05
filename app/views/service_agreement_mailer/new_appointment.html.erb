@@ -1,0 +1,10 @@
+<h1>ServiceAgreementMailer#new_appointment</h1>
+
+<p>Thank you for business.  We look forward to seeing you at your next appointment:
+</p>
+<em><%= @agreement.appointment_date_and_time.strftime("%A, %B %-d, %Y, at %I:%M %p") %>
+</em>
+<p>For your future reference, you can find your online copy of your service agreement at:
+</p>
+<p><%= link_to service_agreement_url(@agreement), @agreement %>
+</p>

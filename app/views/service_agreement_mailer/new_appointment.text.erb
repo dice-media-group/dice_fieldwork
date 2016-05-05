@@ -1,0 +1,8 @@
+Thank you for business.  We look forward to seeing you at your next appointment:
+
+<%= @agreement.appointment_date_and_time.strftime("%A, %B %-d, %Y, at %I:%M %p") %>
+
+
+For your future reference, you can find your online copy of your service agreement at:
+
+<%= service_agreement_url(@agreement) %>
