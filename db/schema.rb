@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427175610) do
+ActiveRecord::Schema.define(version: 20160505131509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(version: 20160427175610) do
     t.boolean  "is_business"
     t.string   "referral_source"
     t.string   "company_name"
+  end
+
+  create_table "additional_fees", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "price",      precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  create_table "additional_fees_service_agreements", id: false, force: :cascade do |t|
+    t.integer "additional_fee_id",    null: false
+    t.integer "service_agreement_id", null: false
   end
 
   create_table "addresses", force: :cascade do |t|
@@ -245,6 +257,14 @@ ActiveRecord::Schema.define(version: 20160427175610) do
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
+  create_table "service_agreement_additional_fees", force: :cascade do |t|
+    t.string   "service_id"
+    t.string   "service_agreement_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "additional_fee_id"
+  end
 
   create_table "service_agreements", force: :cascade do |t|
     t.text     "field_tech_signature"

@@ -100,8 +100,9 @@ class ServiceAgreementsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white
     # list through.
     def agreement_params
-      params.require(:service_agreement).permit(:credit_card_signature, :field_tech_signature, :customer_signature,
-        :customers_initials_for_charges, :satisfaction_guarantee_initials, :account_id) if params[:service_agreement]
+      params.require(:service_agreement).permit(:credit_card_signature, 
+      :field_tech_signature, :customer_signature,:customers_initials_for_charges, 
+      :satisfaction_guarantee_initials, :account_id,  additional_fee_ids:[]) if params[:service_agreement]
         # ,
         # :credit_card_signature, :notes => [:content], order_attributes: [:pay_type])
     end
