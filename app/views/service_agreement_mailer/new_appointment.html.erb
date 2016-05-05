@@ -1,0 +1,17 @@
+<h1>ServiceAgreementMailer#new_appointment</h1>
+
+<p>Thank you for business.  We look forward to seeing you at your next appointment:
+</p>
+<em><%= @agreement.appointment_date_and_time.strftime("%A, %B %-d, %Y, at %I:%M %p") %>
+</em>
+<p>For your future reference, you can find your online copy of your service agreement at:
+</p>
+<%= service_agreement_url(@agreement) %>
+<%= link_to "my service agreement", @agreement %>
+
+
+<p>&nbsp;&nbsp;</p>
+<p>Support
+</p>
+<p>Big Tom's Pest Control</p>
+<p>406-218-1782</p>
