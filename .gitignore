@@ -43,3 +43,6 @@ bower.json
 
 # Ignore passenger changes
 passenger*
+
+# Ignore local developmental variables
+.env
