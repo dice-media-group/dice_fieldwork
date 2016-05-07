@@ -83,15 +83,13 @@ class ServiceAgreementsController < ApplicationController
     order.save!
     session.delete[:order_id] if session[:order_id]
 
-    # Tell the ServiceAgreementMailer to send a copy of the updated service agreement to the account
-    mail = ServiceAgreementMailer.share_agreement(@agreement)
 
     respond_to do |format|
       if @agreement.update_attributes(agreement_params)
         #send email 
         # Tell the ServiceAgreementMailer to send a copy of the updated service agreement to the account
         mail = ServiceAgreementMailer.share_agreement(@agreement)
-                
+        mail.deliver_now
         format.html { redirect_to @agreement, notice: 'Agreement was successfully initiated.' }
       else
         format.html { render action: 'edit' }
