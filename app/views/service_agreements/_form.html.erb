@@ -112,7 +112,19 @@
                   <h2>Big Toms Pest Control</h2>
                   <h3>#1 in Pest Control Service</h3>
                   <div class="row">
-                      <%= render :partial => 'fieldtech_name' %>
+                      <%#= render :partial => 'fieldtech_name', locals: {f: agreement} %>
+                      <div id="fieldtech_name" class ="row container">
+                                      <p><strong>Field Rep</strong></p>
+                                      <% if !@agreement.field_rep.blank? %>
+                                          <em><%= @agreement.field_rep %>&nbsp;</em>
+                                      <% else %>
+                                          <div class="form-group">
+                                              <%= f.text_field :field_rep, class: "form-control"  %>
+                                          </div>
+                    
+                                      <% end %>
+                      </div>
+                      
                   </div>
                   <div class="row container">
                       <div id="satisfaction_guarantee" class="row thin-rounded-box">

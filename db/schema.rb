@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505181124) do
+ActiveRecord::Schema.define(version: 20160507142356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,6 +282,7 @@ ActiveRecord::Schema.define(version: 20160505181124) do
     t.integer  "order_id"
     t.integer  "user_id"
     t.datetime "appointment_date_and_time"
+    t.string   "field_rep"
   end
 
   add_index "service_agreements", ["account_id"], name: "index_service_agreements_on_account_id", using: :btree

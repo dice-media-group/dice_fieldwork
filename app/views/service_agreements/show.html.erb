@@ -62,7 +62,7 @@
       <h2>Big Toms Pest Control</h2>
       <h3>#1 in Pest Control Service</h3>
       <div class="row thin-rounded-box">
-          <%= render :partial => 'fieldtech_name' %>
+          <%= render :partial => 'fieldtech_name', locals: {agreement: @agreement}  %>
       </div>
       <div id="satisfaction_guarantee">
           <%= render :partial => 'satisfaction_guarantee' %>
@@ -76,7 +76,7 @@
                   <div class="row thin-rounded-box container" id="additional_fees">
                       <h2> Additional Fees</h2>
                       <div id="additional_order_items">
-                          <%= render :partial => 'additional_order_items' %>
+                          <%#= render :partial => 'additional_order_items' %>
                       </div>
                       <!-- Button trigger modal -->
                       <%= link_to "Edit Order", edit_order_path(@order), remote: true, class: "btn btn-primary" %>
@@ -122,7 +122,7 @@
               </div>
           </div>
           <div class ="row printed_name_of_signature">
-            <p><%= current_user.name %></p>
+            <p><%= @agreement.field_rep %></p>
           </div>
           <div class="row signing_date">
               <%= @agreement.created_at.strftime( "%D" ) %><br />

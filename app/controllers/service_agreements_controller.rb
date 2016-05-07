@@ -1,5 +1,5 @@
 class ServiceAgreementsController < ApplicationController
-  authorize_resource
+  authorize_resource :except => [:show]
 
   # GET /services
   # GET /services.json
@@ -85,8 +85,8 @@ class ServiceAgreementsController < ApplicationController
     respond_to do |format|
       if @agreement.update_attributes(agreement_params)
         #send email 
-        # Tell the AccountMailer to send a welcome email after save
-        UserMailer.welcome_email(@account).deliver_later
+        # Tell the ServiceAgreementMailer to send a copy of the updated service agreement to the account
+        mail = ServiceAgreementMailer.share_agreement(@agreement)
                 
         format.html { redirect_to @agreement, notice: 'Agreement was successfully initiated.' }
       else
@@ -105,7 +105,7 @@ class ServiceAgreementsController < ApplicationController
     # list through.
     def agreement_params
       params.require(:service_agreement).permit(:credit_card_signature, 
-      :field_tech_signature, :customer_signature,:customers_initials_for_charges, 
+      :field_tech_signature, :field_rep, :customer_signature,:customers_initials_for_charges, 
       :satisfaction_guarantee_initials, :account_id,  additional_fee_ids:[]) if params[:service_agreement]
         # ,
         # :credit_card_signature, :notes => [:content], order_attributes: [:pay_type])
